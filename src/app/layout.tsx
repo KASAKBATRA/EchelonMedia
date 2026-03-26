@@ -5,6 +5,11 @@ import '../styles/index.css';
 export const metadata: Metadata = {
 	title: 'Echelon Media',
 	description: 'Creative digital agency focused on branding, content, and growth.',
+	icons: {
+		icon: '/assets/image/logo.png',
+		shortcut: '/assets/image/logo.png',
+		apple: '/assets/image/logo.png',
+	},
 };
 
 interface RootLayoutProps {

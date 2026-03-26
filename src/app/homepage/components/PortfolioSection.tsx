@@ -146,10 +146,38 @@ export default function PortfolioSection() {
       <section
         ref={sectionRef}
         id="portfolio"
-        className="py-24 md:py-32"
+        className="relative overflow-hidden py-24 md:py-32"
         style={{ background: '#EDE8DF' }}>
+
+        {/* Atmospheric background layers */}
+        <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
+          <div
+            className="absolute -top-24 -left-20 w-[460px] h-[460px] rounded-full"
+            style={{
+              background: 'radial-gradient(circle, rgba(200,169,110,0.22) 0%, rgba(200,169,110,0.08) 38%, transparent 72%)',
+              filter: 'blur(12px)',
+            }}
+          />
+          <div
+            className="absolute -bottom-28 -right-24 w-[520px] h-[520px] rounded-full"
+            style={{
+              background: 'radial-gradient(circle, rgba(26,26,26,0.16) 0%, rgba(26,26,26,0.04) 42%, transparent 75%)',
+              filter: 'blur(16px)',
+            }}
+          />
+          <div
+            className="absolute inset-0"
+            style={{
+              backgroundImage: 'radial-gradient(rgba(200,169,110,0.22) 1px, transparent 1px)',
+              backgroundSize: '28px 28px',
+              opacity: 0.22,
+              maskImage: 'linear-gradient(to bottom, rgba(0,0,0,0.9), rgba(0,0,0,0.28))',
+              WebkitMaskImage: 'linear-gradient(to bottom, rgba(0,0,0,0.9), rgba(0,0,0,0.28))',
+            }}
+          />
+        </div>
         
-        <div className="max-w-7xl mx-auto px-6 md:px-10">
+        <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-10">
           {/* Header */}
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6 reveal-hidden">
             <div>

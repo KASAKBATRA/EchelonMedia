@@ -55,6 +55,11 @@ function SocialIcon({ icon }: { icon: (typeof SOCIAL_LINKS)[number]['icon'] }) {
 export default function NavBar() {
   const navRef = useRef<HTMLElement>(null);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   useEffect(() => {
     const nav = navRef.current;
@@ -75,6 +80,10 @@ export default function NavBar() {
     const el = document.querySelector(href);
     if (el) el.scrollIntoView({ behavior: 'smooth' });
   };
+
+  if (!isMounted) {
+    return <nav ref={navRef} className="nav-bar" aria-label="Main navigation" />;
+  }
 
   return (
     <nav ref={navRef} className="nav-bar" aria-label="Main navigation">
