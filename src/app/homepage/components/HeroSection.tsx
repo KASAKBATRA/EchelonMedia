@@ -282,17 +282,17 @@ export default function HeroSection() {
       <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-10 pt-32 pb-20" style={{ zIndex: 10 }}>
         <div className="text-center max-w-5xl mx-auto">
           <div className="section-label justify-center mb-8">
-            Digital Marketing Agency — Est. 2025
+            Media and Marketing Company
           </div>
           <h1 className="hero-headline mb-6">
             We craft<br />
-            <span className="italic-word" style={{ fontFamily: 'var(--font-cursive)', fontStyle: 'normal', fontSize: '1.15em', letterSpacing: '0.01em' }}>stories</span> that<br />
-            move people.
+            <span className="italic-word" style={{ fontFamily: 'Georgia, serif', fontStyle: 'normal', fontSize: '1.15em', letterSpacing: '0.01em', fontWeight: 700 }}>stories</span> that<br />
+            resonates.
           </h1>
           <p
             className="text-echelon-muted max-w-lg mx-auto mb-10 leading-relaxed"
             style={{ fontFamily: 'DM Sans, sans-serif', fontSize: '1.1rem', fontWeight: 400 }}>
-            From social media to full-scale brand experiences we build digital presence that converts.
+            If you want your audience to be your customer then you are on right place
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <a href="#services" className="btn-primary">
@@ -300,9 +300,6 @@ export default function HeroSection() {
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M5 12h14M12 5l7 7-7 7" />
               </svg>
-            </a>
-            <a href="#portfolio" className="btn-outline">
-              View Portfolio
             </a>
           </div>
         </div>
