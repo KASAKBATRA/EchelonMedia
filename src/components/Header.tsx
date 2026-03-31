@@ -6,7 +6,7 @@ import AppLogo from '@/components/ui/AppLogo';
 const NAV_LINKS = [
   { label: 'Services', href: '#services' },
   { label: 'Portfolio', href: '#portfolio' },
-  { label: 'Careers', href: '#careers' },
+  { label: 'Join Now', href: '#careers' },
 ];
 
 const SOCIAL_LINKS = [
@@ -55,6 +55,7 @@ function SocialIcon({ icon }: { icon: (typeof SOCIAL_LINKS)[number]['icon'] }) {
 export default function NavBar() {
   const navRef = useRef<HTMLElement>(null);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [contactMenuOpen, setContactMenuOpen] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
@@ -94,12 +95,12 @@ export default function NavBar() {
         className="flex items-center gap-2.5 z-10"
         aria-label="Echelon Media — Go to top"
       >
-        <AppLogo size={32} />
+        <AppLogo size={64} />
         <span
-          className="font-display text-echelon-black"
-          style={{ fontSize: '1.1rem', fontWeight: 800, letterSpacing: '-0.03em' }}
+          className="font-display"
+          style={{ fontSize: '1.4rem', fontWeight: 800, letterSpacing: '-0.03em', color: '#5D4037' }}
         >
-          ECHELON
+          Echelon Media
         </span>
       </a>
 
@@ -109,33 +110,46 @@ export default function NavBar() {
           <button
             key={link.label}
             onClick={() => handleNavClick(link.href)}
-            className="text-sm font-medium text-echelon-muted hover:text-echelon-black transition-colors duration-200"
-            style={{ fontFamily: 'DM Sans, sans-serif', background: 'none', border: 'none', cursor: 'pointer' }}
+            className="font-bold hover:text-echelon-gold transition-colors duration-200"
+            style={{ fontFamily: 'DM Sans, sans-serif', background: 'none', border: 'none', cursor: 'pointer', fontSize: '1rem', color: '#5D4037' }}
           >
             {link.label}
           </button>
         ))}
-        <div className="hidden lg:flex items-center gap-2">
-          {SOCIAL_LINKS.map((item) => (
-            <a
-              key={item.label}
-              href={item.href}
-              target={item.href.startsWith('http') ? '_blank' : undefined}
-              rel={item.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-              className="w-8 h-8 rounded-full flex items-center justify-center border border-black/10 text-echelon-muted hover:text-echelon-black hover:border-black/25 transition-colors duration-200"
-              aria-label={item.label}
+        <div className="relative">
+          <button
+            onClick={() => setContactMenuOpen(!contactMenuOpen)}
+            className="font-bold hover:text-echelon-gold transition-colors duration-200"
+            style={{ fontFamily: 'DM Sans, sans-serif', background: 'none', border: 'none', cursor: 'pointer', fontSize: '1rem', color: '#5D4037' }}
+          >
+            Contact Us
+          </button>
+          {contactMenuOpen && (
+            <div
+              className="absolute top-full mt-2 right-0 bg-white border border-gray-200 rounded-lg shadow-lg z-50"
+              style={{ minWidth: '150px' }}
             >
-              <SocialIcon icon={item.icon} />
-            </a>
-          ))}
+              <a
+                href="https://wa.me/919910706037?text=Hi%20Echelon%20Media%2C%20I%20want%20to%20discuss%20a%20project."
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setContactMenuOpen(false)}
+                className="block px-4 py-3 text-echelon-black hover:bg-gray-100 transition-colors duration-200 border-b border-gray-200"
+                style={{ textDecoration: 'none', fontSize: '0.95rem', fontWeight: 500 }}
+              >
+                WhatsApp
+              </a>
+              <a
+                href="mailto:echelonmedia17@gmail.com"
+                onClick={() => setContactMenuOpen(false)}
+                className="block px-4 py-3 text-echelon-black hover:bg-gray-100 transition-colors duration-200"
+                style={{ textDecoration: 'none', fontSize: '0.95rem', fontWeight: 500 }}
+              >
+                Email
+              </a>
+            </div>
+          )}
         </div>
-        <button
-          onClick={() => handleNavClick('#careers')}
-          className="btn-primary py-2.5 px-5 text-sm"
-          style={{ padding: '0.625rem 1.25rem', fontSize: '0.85rem' }}
-        >
-          Work With Us
-        </button>
       </div>
 
       {/* Mobile Menu Toggle */}
@@ -176,25 +190,34 @@ export default function NavBar() {
             </button>
           ))}
           <button
-            onClick={() => handleNavClick('#careers')}
-            className="btn-primary mt-4"
+            onClick={() => setContactMenuOpen(!contactMenuOpen)}
+            className="font-display text-echelon-black text-4xl font-bold hover:text-echelon-gold transition-colors duration-200"
+            style={{ background: 'none', border: 'none', cursor: 'pointer', letterSpacing: '-0.03em' }}
           >
-            Work With Us
+            Contact Us
           </button>
-          <div className="mt-2 flex items-center gap-3">
-            {SOCIAL_LINKS.map((item) => (
+          {contactMenuOpen && (
+            <div className="mt-6 flex flex-col gap-4">
               <a
-                key={item.label}
-                href={item.href}
-                target={item.href.startsWith('http') ? '_blank' : undefined}
-                rel={item.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                className="w-10 h-10 rounded-full flex items-center justify-center border border-black/15 text-echelon-black/75 hover:text-echelon-black hover:border-black/30 transition-colors duration-200"
-                aria-label={item.label}
+                href="https://wa.me/919910706037?text=Hi%20Echelon%20Media%2C%20I%20want%20to%20discuss%20a%20project."
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setContactMenuOpen(false)}
+                className="text-center px-6 py-3 bg-echelon-black text-white rounded-lg hover:opacity-80 transition-opacity duration-200 font-bold"
+                style={{ textDecoration: 'none' }}
               >
-                <SocialIcon icon={item.icon} />
+                WhatsApp
               </a>
-            ))}
-          </div>
+              <a
+                href="mailto:echelonmedia17@gmail.com"
+                onClick={() => setContactMenuOpen(false)}
+                className="text-center px-6 py-3 bg-echelon-black text-white rounded-lg hover:opacity-80 transition-opacity duration-200 font-bold"
+                style={{ textDecoration: 'none' }}
+              >
+                Email
+              </a>
+            </div>
+          )}
         </div>
       )}
     </nav>

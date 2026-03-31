@@ -29,29 +29,8 @@ export default function CollaboratorsSection() {
         </h2>
       </div>
 
-      {/* Mobile: all logos in rows */}
-      <div className="relative px-4 md:hidden">
-        <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-          {COLLABORATOR_LOGOS.map((logoSrc, idx) => (
-            <div
-              key={`${logoSrc}-${idx}`}
-              className="flex items-center justify-center rounded-2xl px-3 py-3 bg-[#F4EFE6] border border-[#C8A96E]/35 shadow-[0_10px_30px_rgba(0,0,0,0.25)]"
-            >
-              <Image
-                src={logoSrc}
-                alt="Collaborator logo"
-                width={220}
-                height={90}
-                className="h-12 w-auto object-contain opacity-100 transition-all duration-300 filter contrast-125 saturate-115"
-                priority={idx < 5}
-              />
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Desktop: marquee */}
-      <div className="relative overflow-hidden hidden md:block">
+      {/* Marquee container */}
+      <div className="relative overflow-hidden">
         {/* Left fade */}
         <div className="absolute left-0 top-0 bottom-0 w-32 z-10 bg-gradient-to-r from-[#0a0a0a] to-transparent pointer-events-none" />
         {/* Right fade */}
