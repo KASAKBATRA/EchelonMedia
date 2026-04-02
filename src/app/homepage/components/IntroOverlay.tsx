@@ -60,18 +60,24 @@ export default function IntroOverlay() {
           {/* Wordmark */}
           <div className="flex flex-col items-center gap-1">
             <span
-              className="font-display text-white"
-              style={{ fontSize: '2.8rem', fontWeight: 800, letterSpacing: '-0.03em', lineHeight: 1 }}
+              className="font-display"
+              style={{
+                fontSize: '2.8rem',
+                fontWeight: 800,
+                letterSpacing: '-0.03em',
+                lineHeight: 1,
+                color: '#F5EFE7',
+              }}
             >
               ECHELON
             </span>
             <span
               style={{
-                fontFamily: 'DM Sans, sans-serif',
+                fontFamily: 'var(--font-body)',
                 fontSize: '0.65rem',
                 fontWeight: 600,
                 letterSpacing: '0.32em',
-                color: '#C8A96E',
+                color: '#D6C3A3',
                 textTransform: 'uppercase',
               }}
             >
