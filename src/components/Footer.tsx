@@ -18,31 +18,36 @@ const SOCIAL_LINKS = [
 function SocialIcon({ icon }: { icon: (typeof SOCIAL_LINKS)[number]['icon'] }) {
   if (icon === 'instagram') {
     return (
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-        <rect x="2" y="2" width="20" height="20" rx="5" ry="5" stroke="#E1306C" />
-        <path d="M16 11.37a4 4 0 1 1-7.9 1.18 4 4 0 0 1 7.9-1.18z" stroke="#FCAF45" />
-        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" stroke="#833AB4" />
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="url(#instagram-gradient)" aria-hidden="true">
+        <defs>
+          <linearGradient id="instagram-gradient" x1="0%" y1="100%" x2="100%" y2="0%">
+            <stop offset="0%" stopColor="#FD5949"/>
+            <stop offset="50%" stopColor="#D6249F"/>
+            <stop offset="100%" stopColor="#285AEB"/>
+          </linearGradient>
+        </defs>
+        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
       </svg>
     );
   }
   if (icon === 'linkedin') {
     return (
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="#0A66C2" aria-hidden="true">
-        <path d="M6.94 8.5H3.56V20h3.38V8.5zM5.25 3A1.96 1.96 0 1 0 5.3 6.92 1.96 1.96 0 0 0 5.25 3zM20.44 13.36c0-3.23-1.72-4.73-4.02-4.73-1.85 0-2.68 1.02-3.14 1.74V8.5H9.9V20h3.38v-5.69c0-1.5.28-2.95 2.14-2.95 1.83 0 1.86 1.71 1.86 3.05V20h3.37v-6.64z"/>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="#0A66C2" aria-hidden="true">
+        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
       </svg>
     );
   }
   if (icon === 'mail') {
     return (
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-        <path d="M4 4h16v16H4z" stroke="#EA4335" />
-        <path d="m22 6-10 7L2 6" stroke="#FBBC05" />
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+        <rect x="3" y="5" width="18" height="14" rx="2" />
+        <path d="m3 7 9 6 9-6" />
       </svg>
     );
   }
   return (
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="#25D366" aria-hidden="true">
-      <path d="M19.05 4.91A10 10 0 0 0 3 17.04L2 22l5.1-1.34A10 10 0 1 0 19.05 4.9Zm-7.06 15.2a8.3 8.3 0 0 1-4.22-1.15l-.3-.18-3.03.8.8-2.95-.2-.3a8.31 8.31 0 1 1 6.95 3.78Zm4.56-6.2c-.25-.12-1.48-.73-1.71-.8-.23-.08-.4-.12-.57.12-.17.25-.66.8-.81.97-.15.17-.3.19-.55.06-.25-.12-1.07-.4-2.03-1.28-.75-.67-1.25-1.5-1.4-1.76-.15-.25-.02-.38.1-.5.11-.1.25-.25.38-.38.12-.12.17-.21.25-.35.08-.15.04-.28-.02-.4-.06-.12-.57-1.38-.78-1.9-.2-.48-.4-.42-.57-.43h-.49c-.17 0-.44.06-.67.3-.23.25-.88.86-.88 2.1s.9 2.44 1.02 2.6c.12.17 1.77 2.7 4.28 3.8.6.26 1.06.41 1.43.52.6.19 1.14.16 1.57.1.48-.07 1.48-.61 1.69-1.2.21-.6.21-1.11.15-1.2-.06-.1-.23-.16-.48-.28Z"/>
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="#25D366" aria-hidden="true">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
     </svg>
   );
 }
@@ -61,7 +66,7 @@ export default function FooterSection() {
   return (
     <footer
       className="relative overflow-hidden"
-      style={{ background: '#1A1A1A', borderTop: '1px solid rgba(255,255,255,0.06)' }}
+      style={{ background: '#1E3A8A', borderTop: '1px solid rgba(255,255,255,0.06)' }}
     >
       {/* Top CTA Band */}
       <div
@@ -72,28 +77,28 @@ export default function FooterSection() {
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
-            background: 'radial-gradient(ellipse at 50% 100%, rgba(200,169,110,0.12) 0%, transparent 70%)',
+            background: 'radial-gradient(ellipse at 50% 100%, rgba(37,99,235,0.15) 0%, transparent 70%)',
           }}
         />
         <div className="relative z-10">
-          <div className="section-label justify-center mb-6" style={{ color: '#C8A96E' }}>
+          <div className="section-label justify-center mb-6" style={{ color: '#2563EB' }}>
             Let's Create Together
           </div>
           <h2
-            className="font-display text-white mb-6"
-            style={{ fontSize: 'clamp(2.5rem, 6vw, 5rem)', fontWeight: 800, lineHeight: 1, letterSpacing: '-0.04em' }}
+            className="text-white mb-6"
+            style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(2.5rem, 6vw, 5rem)', fontWeight: 800, lineHeight: 1, letterSpacing: '-0.04em' }}
           >
             Ready to elevate<br />
-            <span style={{ fontStyle: 'italic', color: '#C8A96E' }}>your brand?</span>
+            <span style={{ fontStyle: 'italic', color: '#2563EB' }}>your brand?</span>
           </h2>
-          <p className="text-white/50 max-w-sm mx-auto mb-8 leading-relaxed" style={{ fontFamily: 'DM Sans, sans-serif' }}>
+          <p className="text-white/50 max-w-sm mx-auto mb-8 leading-relaxed" style={{ fontFamily: 'var(--font-body)' }}>
             From strategy to execution we handle the digital. You focus on the vision.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <a
               href="mailto:echelonmedia17@gmail.com"
               className="btn-primary"
-              style={{ background: '#C8A96E', color: '#1A1A1A' }}
+              style={{ background: '#2563EB', color: '#F9FAFB' }}
             >
               Start a Project
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -103,7 +108,7 @@ export default function FooterSection() {
             <a
               href="mailto:echelonmedia17@gmail.com"
               className="text-white/50 text-sm hover:text-white transition-colors duration-200"
-              style={{ fontFamily: 'DM Sans, sans-serif' }}
+              style={{ fontFamily: 'var(--font-body)' }}
             >
               echelonmedia17@gmail.com
             </a>
@@ -118,12 +123,12 @@ export default function FooterSection() {
             <AppLogo size={28} />
             <div>
               <span
-                className="font-display text-white font-bold block"
-                style={{ fontSize: '0.95rem', letterSpacing: '-0.02em' }}
+                className="text-white font-bold block"
+                style={{ fontFamily: 'var(--font-display)', fontSize: '0.95rem', letterSpacing: '-0.02em' }}
               >
                 ECHELON MEDIA
               </span>
-              <span className="text-white/30 text-xs" style={{ fontFamily: 'DM Sans, sans-serif' }}>
+              <span className="text-white/30 text-xs" style={{ fontFamily: 'var(--font-body)' }}>
                 Creative Digital Agency
               </span>
             </div>
@@ -131,36 +136,21 @@ export default function FooterSection() {
 
           {/* Center: Nav Links */}
           <div className="flex items-center gap-6 flex-wrap justify-center">
-            {['Services', 'Portfolio', 'Careers']?.map((link) => (
+            {['Services', 'Portfolio', 'Careers', 'Privacy', 'Terms']?.map((link) => (
               <a
                 key={link}
                 href={`#${link?.toLowerCase()}`}
                 className="text-white/40 hover:text-white/80 transition-colors duration-200 text-sm font-medium"
-                style={{ fontFamily: 'DM Sans, sans-serif' }}
+                style={{ fontFamily: 'var(--font-body)' }}
               >
                 {link}
               </a>
             ))}
-            <span className="text-white/15">·</span>
-            <a
-              href="#"
-              className="text-white/40 hover:text-white/80 transition-colors duration-200 text-sm"
-              style={{ fontFamily: 'DM Sans, sans-serif' }}
-            >
-              Privacy
-            </a>
-            <a
-              href="#"
-              className="text-white/40 hover:text-white/80 transition-colors duration-200 text-sm"
-              style={{ fontFamily: 'DM Sans, sans-serif' }}
-            >
-              Terms
-            </a>
           </div>
 
           {/* Right: Back to top + copyright */}
           <div className="flex items-center gap-4">
-            <span className="text-white/25 text-xs" style={{ fontFamily: 'DM Sans, sans-serif' }}>
+            <span className="text-white/25 text-xs" style={{ fontFamily: 'var(--font-body)' }}>
               {year ? `© ${year}` : '©'} Echelon Media
             </span>
             <button
@@ -181,7 +171,7 @@ export default function FooterSection() {
           className="max-w-7xl mx-auto mt-6 pt-5 flex flex-wrap items-center justify-center gap-2"
           style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}
         >
-          <span className="text-white/35 text-xs uppercase tracking-[0.2em] mr-2" style={{ fontFamily: 'DM Sans, sans-serif' }}>
+          <span className="text-white/35 text-xs uppercase tracking-[0.2em] mr-2" style={{ fontFamily: 'var(--font-body)' }}>
             Connect
           </span>
           {SOCIAL_LINKS.map((item) => (
@@ -190,9 +180,9 @@ export default function FooterSection() {
               href={item.href}
               target={item.external ? '_blank' : undefined}
               rel={item.external ? 'noopener noreferrer' : undefined}
-              className="w-9 h-9 rounded-full flex items-center justify-center transition-colors duration-200"
+              className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110"
               style={{
-                color: 'rgba(255,255,255,0.7)',
+                color: item.icon === 'mail' ? '#2563EB' : 'currentColor',
                 border: '1px solid rgba(255,255,255,0.12)',
                 background: 'rgba(255,255,255,0.02)',
               }}
