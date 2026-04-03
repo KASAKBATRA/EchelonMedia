@@ -149,7 +149,7 @@ export default function PortfolioSection() {
         ref={sectionRef}
         id="portfolio"
         className="relative overflow-hidden py-24 md:py-32"
-        style={{ background: '#EDE3D7' }}
+        style={{ background: '#3E2F2B' }}
       >
         {/* Atmospheric background layers */}
         <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
@@ -157,7 +157,7 @@ export default function PortfolioSection() {
             className="absolute -top-24 -left-20 w-[460px] h-[460px] rounded-full"
             style={{
               background:
-                'radial-gradient(circle, rgba(214,195,163,0.24) 0%, rgba(214,195,163,0.08) 38%, transparent 72%)',
+                'radial-gradient(circle, rgba(214,195,163,0.26) 0%, rgba(214,195,163,0.1) 38%, transparent 72%)',
               filter: 'blur(12px)',
             }}
           />
@@ -165,7 +165,7 @@ export default function PortfolioSection() {
             className="absolute -bottom-28 -right-24 w-[520px] h-[520px] rounded-full"
             style={{
               background:
-                'radial-gradient(circle, rgba(62,47,43,0.16) 0%, rgba(62,47,43,0.04) 42%, transparent 75%)',
+                'radial-gradient(circle, rgba(245,239,231,0.12) 0%, rgba(245,239,231,0.04) 42%, transparent 75%)',
               filter: 'blur(16px)',
             }}
           />
@@ -174,10 +174,10 @@ export default function PortfolioSection() {
             style={{
               backgroundImage: 'radial-gradient(rgba(214,195,163,0.22) 1px, transparent 1px)',
               backgroundSize: '28px 28px',
-              opacity: 0.22,
-              maskImage: 'linear-gradient(to bottom, rgba(62,47,43,0.9), rgba(62,47,43,0.28))',
+              opacity: 0.2,
+              maskImage: 'linear-gradient(to bottom, rgba(245,239,231,0.32), rgba(245,239,231,0.1))',
               WebkitMaskImage:
-                'linear-gradient(to bottom, rgba(62,47,43,0.9), rgba(62,47,43,0.28))',
+                'linear-gradient(to bottom, rgba(245,239,231,0.32), rgba(245,239,231,0.1))',
             }}
           />
         </div>
@@ -190,7 +190,7 @@ export default function PortfolioSection() {
                 Portfolio
               </div>
               <h2
-                className="font-display text-echelon-black"
+                className="font-display text-[#F5EFE7]"
                 style={{
                   fontSize: 'clamp(2.5rem, 5vw, 4.5rem)',
                   fontWeight: 700,

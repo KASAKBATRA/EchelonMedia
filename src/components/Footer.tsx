@@ -93,15 +93,15 @@ export default function FooterSection() {
     <footer
       className="relative overflow-hidden"
       style={{
-        background: '#F5EFE7',
-        borderTop: '1px solid rgba(62,47,43,0.12)',
+        background: '#3E2F2B',
+        borderTop: '1px solid rgba(245,239,231,0.14)',
         fontFamily: 'Poppins, sans-serif',
       }}
     >
       {/* Top CTA Band */}
       <div
         className="py-20 md:py-28 px-6 md:px-10 text-center relative"
-        style={{ borderBottom: '1px solid rgba(62,47,43,0.12)' }}
+        style={{ borderBottom: '1px solid rgba(245,239,231,0.12)' }}
       >
         {/* Atmospheric glow */}
         <div
@@ -123,7 +123,7 @@ export default function FooterSection() {
               fontWeight: 800,
               lineHeight: 1,
               letterSpacing: '-0.04em',
-              color: 'var(--color-primary)',
+              color: '#F5EFE7',
             }}
           >
             Ready to elevate
@@ -132,7 +132,7 @@ export default function FooterSection() {
           </h2>
           <p
             className="max-w-sm mx-auto mb-8 leading-relaxed"
-            style={{ fontFamily: 'var(--font-body)', color: '#8B756B' }}
+            style={{ fontFamily: 'var(--font-body)', color: 'rgba(245,239,231,0.75)' }}
           >
             From strategy to execution we handle the digital. You focus on the vision.
           </p>
@@ -140,7 +140,7 @@ export default function FooterSection() {
             <a
               href="mailto:echelonmedia17@gmail.com"
               className="btn-primary"
-              style={{ background: '#7A5C4D', color: '#F5EFE7' }}
+              style={{ background: '#D6C3A3', color: '#3E2F2B' }}
             >
               Start a Project
               <svg
@@ -159,7 +159,7 @@ export default function FooterSection() {
             <a
               href="mailto:echelonmedia17@gmail.com"
               className="text-sm transition-colors duration-200"
-              style={{ fontFamily: 'var(--font-body)', color: '#8B756B' }}
+              style={{ fontFamily: 'var(--font-body)', color: 'rgba(245,239,231,0.72)' }}
             >
               echelonmedia17@gmail.com
             </a>
@@ -179,14 +179,14 @@ export default function FooterSection() {
                   fontFamily: 'var(--font-display)',
                   fontSize: '0.95rem',
                   letterSpacing: '-0.02em',
-                  color: 'var(--color-primary)',
+                  color: '#F5EFE7',
                 }}
               >
                 ECHELON MEDIA
               </span>
               <span
                 className="text-xs"
-                style={{ fontFamily: 'var(--font-body)', color: '#8B756B' }}
+                style={{ fontFamily: 'var(--font-body)', color: 'rgba(245,239,231,0.7)' }}
               >
                 Creative Digital Agency
               </span>
@@ -200,7 +200,7 @@ export default function FooterSection() {
                 key={link}
                 href={`#${link?.toLowerCase()}`}
                 className="transition-colors duration-200 text-sm font-medium"
-                style={{ fontFamily: 'var(--font-body)', color: '#8B756B' }}
+                style={{ fontFamily: 'var(--font-body)', color: 'rgba(245,239,231,0.74)' }}
               >
                 {link}
               </a>
@@ -209,7 +209,10 @@ export default function FooterSection() {
 
           {/* Right: Back to top + copyright */}
           <div className="flex items-center gap-4">
-            <span className="text-xs" style={{ fontFamily: 'var(--font-body)', color: '#8B756B' }}>
+            <span
+              className="text-xs"
+              style={{ fontFamily: 'var(--font-body)', color: 'rgba(245,239,231,0.68)' }}
+            >
               {year ? `© ${year}` : '©'} Echelon Media
             </span>
             <button
@@ -241,7 +244,7 @@ export default function FooterSection() {
         >
           <span
             className="text-xs uppercase tracking-[0.2em] mr-2"
-            style={{ fontFamily: 'var(--font-body)', color: '#8B756B' }}
+            style={{ fontFamily: 'var(--font-body)', color: 'rgba(245,239,231,0.66)' }}
           >
             Connect
           </span>
@@ -253,9 +256,9 @@ export default function FooterSection() {
               rel={item.external ? 'noopener noreferrer' : undefined}
               className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110"
               style={{
-                color: item.icon === 'mail' ? '#7A5C4D' : '#3E2F2B',
-                border: '1px solid rgba(62,47,43,0.12)',
-                background: 'rgba(255,255,255,0.28)',
+                color: item.icon === 'mail' ? '#D6C3A3' : '#F5EFE7',
+                border: '1px solid rgba(245,239,231,0.16)',
+                background: 'rgba(245,239,231,0.08)',
               }}
               aria-label={item.label}
             >

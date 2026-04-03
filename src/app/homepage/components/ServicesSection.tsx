@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useState, useEffect, useRef } from 'react';
-import { useSearchParams } from 'next/navigation';
 import AppImage from '@/components/ui/AppImage';
 import ServiceModal from './ServiceModal';
 
@@ -464,8 +463,6 @@ const SERVICES: Service[] = [
 export default function ServicesSection() {
   const [activeService, setActiveService] = useState<Service | null>(null);
   const sectionRef = useRef<HTMLElement>(null);
-  const searchParams = useSearchParams();
-  const hasOpenedFromQueryRef = useRef(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -492,19 +489,6 @@ export default function ServicesSection() {
     }
     return () => document.body.classList.remove('modal-open');
   }, [activeService]);
-
-  useEffect(() => {
-    if (hasOpenedFromQueryRef.current) return;
-
-    const serviceId = searchParams.get('service');
-    if (!serviceId) return;
-
-    const matchedService = SERVICES.find((service) => service.id === serviceId);
-    if (!matchedService) return;
-
-    hasOpenedFromQueryRef.current = true;
-    setActiveService(matchedService);
-  }, [searchParams]);
 
   return (
     <>
