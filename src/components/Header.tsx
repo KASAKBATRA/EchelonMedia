@@ -89,7 +89,9 @@ function SocialIcon({ icon }: { icon: (typeof SOCIAL_LINKS)[number]['icon'] }) {
 export default function NavBar() {
   const navRef = useRef<HTMLElement>(null);
   const servicesMenuRef = useRef<HTMLDivElement>(null);
+  const mobileServicesMenuRef = useRef<HTMLDivElement>(null);
   const contactMenuRef = useRef<HTMLDivElement>(null);
+  const mobileContactMenuRef = useRef<HTMLDivElement>(null);
   const [menuOpen, setMenuOpen] = useState(false);
   const [servicesMenuOpen, setServicesMenuOpen] = useState(false);
   const [contactMenuOpen, setContactMenuOpen] = useState(false);
@@ -116,16 +118,16 @@ export default function NavBar() {
   useEffect(() => {
     const handleOutsideClick = (event: MouseEvent) => {
       const target = event.target as Node;
+      const clickedInsideDesktopServices = servicesMenuRef.current?.contains(target) ?? false;
+      const clickedInsideMobileServices = mobileServicesMenuRef.current?.contains(target) ?? false;
+      const clickedInsideDesktopContact = contactMenuRef.current?.contains(target) ?? false;
+      const clickedInsideMobileContact = mobileContactMenuRef.current?.contains(target) ?? false;
 
-      if (
-        servicesMenuOpen &&
-        servicesMenuRef.current &&
-        !servicesMenuRef.current.contains(target)
-      ) {
+      if (servicesMenuOpen && !clickedInsideDesktopServices && !clickedInsideMobileServices) {
         setServicesMenuOpen(false);
       }
 
-      if (contactMenuOpen && contactMenuRef.current && !contactMenuRef.current.contains(target)) {
+      if (contactMenuOpen && !clickedInsideDesktopContact && !clickedInsideMobileContact) {
         setContactMenuOpen(false);
       }
     };
@@ -346,7 +348,7 @@ export default function NavBar() {
           className="fixed inset-0 z-40 flex flex-col items-center justify-center gap-8"
           style={{ background: 'rgba(245,239,231,0.97)', backdropFilter: 'blur(12px)' }}
         >
-          <div className="w-full max-w-sm px-6">
+          <div ref={mobileServicesMenuRef} className="w-full max-w-sm px-6">
             <button
               onClick={() => setServicesMenuOpen(!servicesMenuOpen)}
               className="w-full font-display text-echelon-black text-4xl font-bold hover:text-[#7A5C4D] transition-colors duration-200 flex items-center justify-center gap-3"
@@ -413,43 +415,45 @@ export default function NavBar() {
               {link.label}
             </button>
           ))}
-          <button
-            onClick={() => {
-              setContactMenuOpen(!contactMenuOpen);
-              setServicesMenuOpen(false);
-            }}
-            className="font-display text-echelon-black text-4xl font-bold hover:text-[#7A5C4D] transition-colors duration-200"
-            style={{
-              background: 'none',
-              border: 'none',
-              cursor: 'pointer',
-              letterSpacing: '-0.03em',
-            }}
-          >
-            Contact Us
-          </button>
-          {contactMenuOpen && (
-            <div className="mt-6 flex flex-col gap-4">
-              <a
-                href="https://wa.me/919910706037?text=Hi%20Echelon%20Media%2C%20I%20want%20to%20discuss%20a%20project."
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => setContactMenuOpen(false)}
-                className="text-center px-6 py-3 bg-echelon-black text-white rounded-lg hover:opacity-90 transition-opacity duration-200 font-bold"
-                style={{ textDecoration: 'none' }}
-              >
-                WhatsApp
-              </a>
-              <a
-                href="mailto:echelonmedia17@gmail.com"
-                onClick={() => setContactMenuOpen(false)}
-                className="text-center px-6 py-3 bg-echelon-black text-white rounded-lg hover:opacity-90 transition-opacity duration-200 font-bold"
-                style={{ textDecoration: 'none' }}
-              >
-                Email
-              </a>
-            </div>
-          )}
+          <div ref={mobileContactMenuRef} className="flex flex-col items-center">
+            <button
+              onClick={() => {
+                setContactMenuOpen(!contactMenuOpen);
+                setServicesMenuOpen(false);
+              }}
+              className="font-display text-echelon-black text-4xl font-bold hover:text-[#7A5C4D] transition-colors duration-200"
+              style={{
+                background: 'none',
+                border: 'none',
+                cursor: 'pointer',
+                letterSpacing: '-0.03em',
+              }}
+            >
+              Contact Us
+            </button>
+            {contactMenuOpen && (
+              <div className="mt-6 flex flex-col gap-4">
+                <a
+                  href="https://wa.me/919910706037?text=Hi%20Echelon%20Media%2C%20I%20want%20to%20discuss%20a%20project."
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => setContactMenuOpen(false)}
+                  className="text-center px-6 py-3 bg-echelon-black text-white rounded-lg hover:opacity-90 transition-opacity duration-200 font-bold"
+                  style={{ textDecoration: 'none' }}
+                >
+                  WhatsApp
+                </a>
+                <a
+                  href="mailto:echelonmedia17@gmail.com"
+                  onClick={() => setContactMenuOpen(false)}
+                  className="text-center px-6 py-3 bg-echelon-black text-white rounded-lg hover:opacity-90 transition-opacity duration-200 font-bold"
+                  style={{ textDecoration: 'none' }}
+                >
+                  Email
+                </a>
+              </div>
+            )}
+          </div>
         </div>
       )}
     </nav>
