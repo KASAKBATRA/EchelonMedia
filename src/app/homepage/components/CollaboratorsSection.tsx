@@ -27,8 +27,7 @@ export default function CollaboratorsSection() {
           Brands We&apos;ve Worked With
         </p>
         <h2 className="text-2xl md:text-3xl font-light text-[#F5EFE7]/92 tracking-wide">
-          Our{' '}
-          <span className="font-cursive text-[#D6C3A3] text-3xl md:text-4xl">Collaborators</span>
+          <span className="font-cursive text-[#D6C3A3] text-3xl md:text-4xl">Trusted Partners</span>
         </h2>
       </div>
 

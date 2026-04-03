@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import AppLogo from '@/components/ui/AppLogo';
 
 const SOCIAL_LINKS = [
@@ -79,12 +79,6 @@ function SocialIcon({ icon }: { icon: (typeof SOCIAL_LINKS)[number]['icon'] }) {
 }
 
 export default function FooterSection() {
-  const [year, setYear] = useState('');
-
-  useEffect(() => {
-    setYear(new Date()?.getFullYear()?.toString());
-  }, []);
-
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -207,14 +201,8 @@ export default function FooterSection() {
             ))}
           </div>
 
-          {/* Right: Back to top + copyright */}
+          {/* Right: Back to top */}
           <div className="flex items-center gap-4">
-            <span
-              className="text-xs"
-              style={{ fontFamily: 'var(--font-body)', color: 'rgba(245,239,231,0.68)' }}
-            >
-              {year ? `© ${year}` : '©'} Echelon Media
-            </span>
             <button
               onClick={scrollToTop}
               className="footer-loop-btn text-xs"
@@ -266,6 +254,13 @@ export default function FooterSection() {
             </a>
           ))}
         </div>
+
+        <p
+          className="max-w-7xl mx-auto mt-3 text-center text-xs"
+          style={{ fontFamily: 'var(--font-body)', color: 'rgba(245,239,231,0.68)' }}
+        >
+          © 2026 Echelon Media
+        </p>
       </div>
     </footer>
   );
