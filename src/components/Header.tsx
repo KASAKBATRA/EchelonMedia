@@ -217,10 +217,11 @@ export default function NavBar() {
               {SERVICE_LINKS.map((service, index) => (
                 <a
                   key={service.id}
-                  href={`/homepage?service=${service.id}#services`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={() => setServicesMenuOpen(false)}
+                  href={`/homepage?service=${service.id}`}
+                  onClick={() => {
+                    setServicesMenuOpen(false);
+                    setMenuOpen(false);
+                  }}
                   className="block px-4 py-3 text-echelon-black hover:bg-[#EDE3D7] transition-colors duration-200"
                   style={{
                     textDecoration: 'none',
@@ -374,9 +375,7 @@ export default function NavBar() {
                 {SERVICE_LINKS.map((service, index) => (
                   <a
                     key={service.id}
-                    href={`/homepage?service=${service.id}#services`}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    href={`/homepage?service=${service.id}`}
                     onClick={() => {
                       setServicesMenuOpen(false);
                       setMenuOpen(false);

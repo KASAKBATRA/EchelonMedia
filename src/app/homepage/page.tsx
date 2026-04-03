@@ -1,11 +1,12 @@
 import React from 'react';
+import { Suspense } from 'react';
 import IntroOverlay from './components/IntroOverlay';
 import NavBar from '../../components/Header';
 import HeroSection from './components/HeroSection';
-import ServicesSection from './components/ServicesSection';
 import PortfolioSection from './components/PortfolioSection';
 import CareersSection from './components/CarrerSection';
 import CollaboratorsSection from './components/CollaboratorsSection';
+import ServiceOverlayHandler from './components/ServiceOverlayHandler';
 import FooterSection from '../../components/Footer';
 
 export default function HomePage() {
@@ -18,9 +19,11 @@ export default function HomePage() {
         <HeroSection />
         <CollaboratorsSection />
         <PortfolioSection />
-        <ServicesSection />
         <CareersSection />
       </main>
+      <Suspense fallback={null}>
+        <ServiceOverlayHandler />
+      </Suspense>
       <FooterSection />
     </>
   );

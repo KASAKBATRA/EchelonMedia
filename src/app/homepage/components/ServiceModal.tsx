@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef } from 'react';
 import AppImage from '@/components/ui/AppImage';
-import type { Service } from './ServicesSection';
+import type { Service } from './servicesData';
 
 interface Props {
   service: Service | null;
