@@ -182,14 +182,14 @@ export default function FooterSection() {
                 className="text-xs"
                 style={{ fontFamily: 'var(--font-body)', color: 'rgba(245,239,231,0.7)' }}
               >
-                Creative Digital Agency
+                MEDIA AND MARKETING COMPANY
               </span>
             </div>
           </div>
 
           {/* Center: Nav Links */}
           <div className="flex items-center gap-6 flex-wrap justify-center">
-            {['Services', 'Portfolio', 'Careers', 'Privacy', 'Terms']?.map((link) => (
+            {['Portfolio', 'Careers', 'Privacy', 'Terms']?.map((link) => (
               <a
                 key={link}
                 href={`#${link?.toLowerCase()}`}
