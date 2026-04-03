@@ -412,7 +412,7 @@ export default function HeroSection() {
             If you want your audience to be your customer then you are on right place
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <a href="#services" className="btn-primary">
+            <a href="#portfolio" className="btn-primary">
               Explore Our Work
               <svg
                 width="16"
