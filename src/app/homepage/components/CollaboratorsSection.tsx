@@ -33,18 +33,18 @@ export default function CollaboratorsSection() {
 
       {/* Mobile: show all logos at once */}
       <div className="md:hidden relative z-10 px-4">
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-3 gap-2.5">
           {COLLABORATOR_LOGOS.map((logoSrc, idx) => (
             <div
               key={`mobile-${logoSrc}-${idx}`}
-              className="flex items-center justify-center rounded-2xl px-3 py-2.5 bg-[#F5EFE7] border border-[#D6C3A3]/35 shadow-[0_10px_24px_rgba(62,47,43,0.2)]"
+              className="flex items-center justify-center rounded-xl px-2 py-2 bg-[#F5EFE7] border border-[#D6C3A3]/35 shadow-[0_8px_20px_rgba(62,47,43,0.18)]"
             >
               <Image
                 src={logoSrc}
                 alt="Collaborator logo"
                 width={220}
                 height={90}
-                className="h-12 w-auto object-contain opacity-100 filter contrast-125 saturate-115"
+                className="h-10 w-auto object-contain opacity-100 filter contrast-125 saturate-115"
                 priority={idx < 4}
               />
             </div>
