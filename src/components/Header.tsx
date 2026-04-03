@@ -155,17 +155,19 @@ export default function NavBar() {
           e.preventDefault();
           handleNavClick('#hero');
         }}
-        className="flex items-center gap-2.5 z-10"
+        className="flex items-center gap-2 sm:gap-2.5 z-10 min-w-0"
         aria-label="Echelon Media — Go to top"
       >
-        <AppLogo size={64} />
+        <AppLogo size={52} className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16" />
         <span
           className="font-display"
           style={{
-            fontSize: '1.4rem',
+            fontSize: 'clamp(1.08rem, 5.1vw, 1.4rem)',
             fontWeight: 800,
             letterSpacing: '-0.03em',
             color: 'var(--color-primary)',
+            whiteSpace: 'nowrap',
+            lineHeight: 1,
           }}
         >
           Echelon Media

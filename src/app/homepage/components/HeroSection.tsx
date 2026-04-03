@@ -221,6 +221,7 @@ export default function HeroSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const [scrolled, setScrolled] = useState(false);
   const [hoveredId, setHoveredId] = useState<number | null>(null);
+  const [isMobile, setIsMobile] = useState(false);
 
   const handleScroll = useCallback(() => {
     const sy = window.scrollY;
@@ -232,6 +233,14 @@ export default function HeroSection() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [handleScroll]);
 
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(max-width: 768px)');
+    const updateMobile = () => setIsMobile(mediaQuery.matches);
+    updateMobile();
+    mediaQuery.addEventListener('change', updateMobile);
+    return () => mediaQuery.removeEventListener('change', updateMobile);
+  }, []);
+
   return (
     <section
       ref={sectionRef}
@@ -242,28 +251,36 @@ export default function HeroSection() {
       {/* ── CONTENT STREAM BACKGROUND ── */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none" style={{ zIndex: 1 }}>
         {contentFrames.map((frame) => {
+          if (isMobile && frame.layer !== 'foreground') return null;
+
           const cfg = layerConfig[frame.layer];
-          const sz = frameSize[frame.layer];
+          const sz = isMobile
+            ? frame.layer === 'foreground'
+              ? { w: 132, h: 166 }
+              : frame.layer === 'mid'
+                ? { w: 110, h: 136 }
+                : { w: 168, h: 204 }
+            : frameSize[frame.layer];
           const isHovered = hoveredId === frame.id;
           const isFg = frame.layer === 'foreground';
 
           return (
             <div
               key={frame.id}
-              className={`cs-frame ${frame.animClass} ${scrolled ? 'cs-scrolled' : ''} ${cfg.shadowClass}`}
+              className={`cs-frame cs-layer-${frame.layer} ${frame.animClass} ${scrolled ? 'cs-scrolled' : ''} ${cfg.shadowClass}`}
               style={{
                 position: 'absolute',
                 left: `${frame.x}%`,
                 top: `${frame.y}%`,
                 width: sz.w,
                 zIndex: cfg.zIndex,
-                opacity: cfg.opacity,
+                opacity: isMobile ? 0.56 : cfg.opacity,
                 filter: cfg.blur > 0 ? `blur(${cfg.blur}px)` : undefined,
                 transform: `rotate(${frame.rotation}deg) scale(${isHovered ? frame.scale * 1.07 : frame.scale})`,
                 transition:
                   'transform 0.4s cubic-bezier(0.25,1,0.5,1), box-shadow 0.4s ease, filter 0.4s ease',
-                pointerEvents: isFg ? 'auto' : 'none',
-                cursor: isFg ? 'pointer' : 'default',
+                pointerEvents: isFg && !isMobile ? 'auto' : 'none',
+                cursor: isFg && !isMobile ? 'pointer' : 'default',
                 boxShadow: isHovered
                   ? '0 20px 60px rgba(200,169,110,0.35), 0 0 0 2px rgba(200,169,110,0.4)'
                   : undefined,
@@ -381,7 +398,7 @@ export default function HeroSection() {
 
       {/* ── HERO CONTENT ── */}
       <div
-        className="relative z-10 max-w-7xl mx-auto px-6 md:px-10 pt-32 pb-20"
+        className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 md:px-10 pt-28 sm:pt-32 pb-24 sm:pb-20"
         style={{ zIndex: 10 }}
       >
         <div className="text-center max-w-5xl mx-auto">
@@ -406,13 +423,13 @@ export default function HeroSection() {
             resonates.
           </h1>
           <p
-            className="text-echelon-muted max-w-lg mx-auto mb-10 leading-relaxed whitespace-nowrap"
-            style={{ fontFamily: 'var(--font-body)', fontSize: '1.1rem', fontWeight: 400 }}
+            className="text-echelon-muted max-w-[92%] sm:max-w-lg mx-auto mb-10 leading-relaxed"
+            style={{ fontFamily: 'var(--font-body)', fontSize: 'clamp(1rem, 3.8vw, 1.1rem)', fontWeight: 400 }}
           >
             If you want your audience to be your customer then you are on right place
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <a href="#portfolio" className="btn-primary">
+            <a href="#portfolio" className="btn-primary w-full sm:w-auto justify-center">
               Explore Our Work
               <svg
                 width="16"
@@ -431,7 +448,7 @@ export default function HeroSection() {
         </div>
 
         {/* Scroll indicator */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-50">
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden sm:flex flex-col items-center gap-2 opacity-50">
           <div
             className="w-5 h-8 border-2 rounded-full flex items-start justify-center pt-1.5"
             style={{ borderColor: 'rgba(62,47,43,0.3)' }}
