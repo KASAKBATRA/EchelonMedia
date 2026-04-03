@@ -102,6 +102,16 @@ export default function NavBar() {
   }, []);
 
   useEffect(() => {
+    if (menuOpen) {
+      document.body.classList.add('modal-open');
+    } else {
+      document.body.classList.remove('modal-open');
+    }
+
+    return () => document.body.classList.remove('modal-open');
+  }, [menuOpen]);
+
+  useEffect(() => {
     const nav = navRef.current;
     if (!nav) return;
     const handleScroll = () => {
@@ -149,7 +159,19 @@ export default function NavBar() {
   }
 
   return (
-    <nav ref={navRef} className="nav-bar" aria-label="Main navigation">
+    <nav
+      ref={navRef}
+      className="nav-bar"
+      aria-label="Main navigation"
+      style={
+        menuOpen
+          ? {
+              backdropFilter: 'none',
+              WebkitBackdropFilter: 'none',
+            }
+          : undefined
+      }
+    >
       {/* Logo */}
       <a
         href="#hero"
@@ -345,8 +367,13 @@ export default function NavBar() {
       {/* Mobile Menu Panel */}
       {menuOpen && (
         <div
-          className="fixed inset-0 z-40 flex flex-col items-center justify-center gap-8"
-          style={{ background: 'rgba(245,239,231,0.97)', backdropFilter: 'blur(12px)' }}
+          className="fixed inset-0 w-screen min-h-[100dvh] overflow-y-auto flex flex-col items-center justify-center gap-8"
+          style={{
+            zIndex: 700,
+            background: 'rgba(245,239,231,0.97)',
+            backdropFilter: 'blur(12px)',
+            WebkitBackdropFilter: 'blur(12px)',
+          }}
         >
           <div ref={mobileServicesMenuRef} className="w-full max-w-sm px-6">
             <button
