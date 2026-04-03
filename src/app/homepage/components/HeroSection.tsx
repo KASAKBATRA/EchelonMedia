@@ -406,7 +406,7 @@ export default function HeroSection() {
             resonates.
           </h1>
           <p
-            className="text-echelon-muted max-w-lg mx-auto mb-10 leading-relaxed"
+            className="text-echelon-muted max-w-lg mx-auto mb-10 leading-relaxed whitespace-nowrap"
             style={{ fontFamily: 'var(--font-body)', fontSize: '1.1rem', fontWeight: 400 }}
           >
             If you want your audience to be your customer then you are on right place
@@ -461,7 +461,8 @@ export default function HeroSection() {
               {[
                 'Social Media Marketing',
                 'Event Coverage',
-                'Branding & Ads',
+                'Branding',
+                'Advertisments',
                 'Website Development',
                 'Wedding Diaries',
                 'Content Creation',

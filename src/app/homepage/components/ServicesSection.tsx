@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useRef } from 'react';
+import { useSearchParams } from 'next/navigation';
 import AppImage from '@/components/ui/AppImage';
 import ServiceModal from './ServiceModal';
 
@@ -313,7 +314,7 @@ const SERVICES: Service[] = [
     id: 'website-dev',
     title: 'Website Development',
     subtitle: 'Design · Build · Optimise',
-    tag: '04',
+    tag: '05',
     coverImage: 'https://img.rocket.new/generatedImages/rocket_gen_img_18d64831f-1772832014781.png',
     coverAlt: 'Modern website development and design',
     description: 'Websites that load fast, look stunning, and convert visitors into customers.',
@@ -387,7 +388,7 @@ const SERVICES: Service[] = [
     id: 'wedding-diaries',
     title: 'Wedding Diaries',
     subtitle: 'Candid · Cinematic · Timeless',
-    tag: '05',
+    tag: '06',
     coverImage: 'https://img.rocket.new/generatedImages/rocket_gen_img_1a968e0c7-1767512494404.png',
     coverAlt: 'Beautiful wedding photography and videography',
     description:
@@ -463,12 +464,8 @@ const SERVICES: Service[] = [
 export default function ServicesSection() {
   const [activeService, setActiveService] = useState<Service | null>(null);
   const sectionRef = useRef<HTMLElement>(null);
-  const featuredServices = SERVICES.filter(
-    (service) => service.id === 'branding' || service.id === 'advertisement'
-  );
-  const supportingServices = SERVICES.filter(
-    (service) => service.id !== 'branding' && service.id !== 'advertisement'
-  );
+  const searchParams = useSearchParams();
+  const hasOpenedFromQueryRef = useRef(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -495,6 +492,19 @@ export default function ServicesSection() {
     }
     return () => document.body.classList.remove('modal-open');
   }, [activeService]);
+
+  useEffect(() => {
+    if (hasOpenedFromQueryRef.current) return;
+
+    const serviceId = searchParams.get('service');
+    if (!serviceId) return;
+
+    const matchedService = SERVICES.find((service) => service.id === serviceId);
+    if (!matchedService) return;
+
+    hasOpenedFromQueryRef.current = true;
+    setActiveService(matchedService);
+  }, [searchParams]);
 
   return (
     <>
@@ -538,94 +548,11 @@ export default function ServicesSection() {
             </div>
           </div>
 
-          {/* Featured Services */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
-            {featuredServices.map((s) => (
-              <div
-                key={s.id}
-                className="service-block reveal-hidden stagger-child"
-                style={{ height: '480px' }}
-                onClick={() => setActiveService(s)}
-                role="button"
-                tabIndex={0}
-                onKeyDown={(e) => e.key === 'Enter' && setActiveService(s)}
-                aria-label={`Open ${s.title} service details`}
-              >
-                <AppImage
-                  src={s.coverImage}
-                  alt={s.coverAlt}
-                  fill
-                  className="service-img absolute inset-0 w-full h-full object-cover"
-                />
-
-                <div className="service-overlay" />
-                <div className="absolute inset-x-0 bottom-0 p-8 z-10">
-                  <div className="flex items-end justify-between gap-6">
-                    <div className="max-w-lg">
-                      <span
-                        className="text-xs font-bold text-echelon-gold mb-2 block"
-                        style={{ letterSpacing: '0.18em', fontFamily: 'var(--font-body)' }}
-                      >
-                        {s.tag}
-                      </span>
-                      <h3
-                        className="font-display text-white text-3xl md:text-4xl font-bold mb-2"
-                        style={{ letterSpacing: '-0.02em' }}
-                      >
-                        {s.title}
-                      </h3>
-                      <p
-                        className="text-white/70 text-sm md:text-base leading-relaxed"
-                        style={{ fontFamily: 'var(--font-body)' }}
-                      >
-                        {s.subtitle}
-                      </p>
-                      <p
-                        className="text-white/60 text-sm mt-3 max-w-md leading-relaxed"
-                        style={{ fontFamily: 'var(--font-body)' }}
-                      >
-                        {s.description}
-                      </p>
-                    </div>
-                    <div className="hidden sm:flex flex-col items-end gap-2">
-                      {s.id === 'branding' ? (
-                        <>
-                          <span className="rounded-full border border-white/25 bg-white/10 px-3 py-1 text-xs font-semibold text-white/90">
-                            Logo mockups
-                          </span>
-                          <span className="rounded-full border border-white/25 bg-white/10 px-3 py-1 text-xs font-semibold text-white/90">
-                            Color palette
-                          </span>
-                          <span className="rounded-full border border-white/25 bg-white/10 px-3 py-1 text-xs font-semibold text-white/90">
-                            Typography samples
-                          </span>
-                        </>
-                      ) : (
-                        <>
-                          <span className="rounded-full border border-white/25 bg-white/10 px-3 py-1 text-xs font-semibold text-white/90">
-                            Dashboard view
-                          </span>
-                          <span className="rounded-full border border-white/25 bg-white/10 px-3 py-1 text-xs font-semibold text-white/90">
-                            Lead gen tracking
-                          </span>
-                          <span className="rounded-full border border-white/25 bg-white/10 px-3 py-1 text-xs font-semibold text-white/90">
-                            Campaign metrics
-                          </span>
-                        </>
-                      )}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* Supporting Services */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {supportingServices.map((s) => (
+            {SERVICES.map((s) => (
               <div
                 key={s.id}
-                className="service-block reveal-hidden stagger-child"
+                className="service-block"
                 style={{ height: '380px' }}
                 onClick={() => setActiveService(s)}
                 role="button"

@@ -4,9 +4,17 @@ import React, { useEffect, useRef, useState } from 'react';
 import AppLogo from '@/components/ui/AppLogo';
 
 const NAV_LINKS = [
-  { label: 'Services', href: '#services' },
   { label: 'Portfolio', href: '#portfolio' },
   { label: 'Join Now', href: '#careers' },
+];
+
+const SERVICE_LINKS = [
+  { label: 'Social Media Marketing', id: 'social-media' },
+  { label: 'Event Coverage', id: 'event-coverage' },
+  { label: 'Branding', id: 'branding' },
+  { label: 'Advertisement', id: 'advertisement' },
+  { label: 'Website Development', id: 'website-dev' },
+  { label: 'Wedding Diaries', id: 'wedding-diaries' },
 ];
 
 const SOCIAL_LINKS = [
@@ -80,7 +88,10 @@ function SocialIcon({ icon }: { icon: (typeof SOCIAL_LINKS)[number]['icon'] }) {
 
 export default function NavBar() {
   const navRef = useRef<HTMLElement>(null);
+  const servicesMenuRef = useRef<HTMLDivElement>(null);
+  const contactMenuRef = useRef<HTMLDivElement>(null);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [servicesMenuOpen, setServicesMenuOpen] = useState(false);
   const [contactMenuOpen, setContactMenuOpen] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
 
@@ -102,8 +113,31 @@ export default function NavBar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    const handleOutsideClick = (event: MouseEvent) => {
+      const target = event.target as Node;
+
+      if (
+        servicesMenuOpen &&
+        servicesMenuRef.current &&
+        !servicesMenuRef.current.contains(target)
+      ) {
+        setServicesMenuOpen(false);
+      }
+
+      if (contactMenuOpen && contactMenuRef.current && !contactMenuRef.current.contains(target)) {
+        setContactMenuOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleOutsideClick);
+    return () => document.removeEventListener('mousedown', handleOutsideClick);
+  }, [servicesMenuOpen, contactMenuOpen]);
+
   const handleNavClick = (href: string) => {
     setMenuOpen(false);
+    setServicesMenuOpen(false);
+    setContactMenuOpen(false);
     const el = document.querySelector(href);
     if (el) el.scrollIntoView({ behavior: 'smooth' });
   };
@@ -140,6 +174,69 @@ export default function NavBar() {
 
       {/* Desktop Nav */}
       <div className="hidden md:flex items-center gap-8">
+        <div ref={servicesMenuRef} className="relative">
+          <button
+            onClick={() => {
+              setServicesMenuOpen(!servicesMenuOpen);
+              setContactMenuOpen(false);
+            }}
+            className="font-bold hover:text-[#7A5C4D] transition-colors duration-200 flex items-center gap-2"
+            style={{
+              fontFamily: 'var(--font-body)',
+              background: 'none',
+              border: 'none',
+              cursor: 'pointer',
+              fontSize: '1rem',
+              color: 'var(--color-primary)',
+            }}
+            aria-haspopup="menu"
+            aria-expanded={servicesMenuOpen}
+          >
+            Services
+            <span
+              style={{
+                fontSize: '0.8rem',
+                transform: servicesMenuOpen ? 'rotate(180deg)' : 'none',
+                transition: 'transform 0.2s ease',
+              }}
+            >
+              ▾
+            </span>
+          </button>
+
+          {servicesMenuOpen && (
+            <div
+              className="absolute top-full mt-3 left-1/2 -translate-x-1/2 rounded-2xl shadow-2xl z-50 overflow-hidden"
+              style={{
+                minWidth: '280px',
+                background: '#F8F2EA',
+                border: '1px solid rgba(62,47,43,0.14)',
+                backdropFilter: 'blur(8px)',
+              }}
+            >
+              {SERVICE_LINKS.map((service, index) => (
+                <a
+                  key={service.id}
+                  href={`/homepage?service=${service.id}#services`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => setServicesMenuOpen(false)}
+                  className="block px-4 py-3 text-echelon-black hover:bg-[#EDE3D7] transition-colors duration-200"
+                  style={{
+                    textDecoration: 'none',
+                    fontSize: '0.94rem',
+                    fontWeight: 500,
+                    borderBottom:
+                      index === SERVICE_LINKS.length - 1 ? 'none' : '1px solid rgba(62,47,43,0.08)',
+                  }}
+                >
+                  {service.label}
+                </a>
+              ))}
+            </div>
+          )}
+        </div>
+
         {NAV_LINKS.map((link) => (
           <button
             key={link.label}
@@ -157,9 +254,12 @@ export default function NavBar() {
             {link.label}
           </button>
         ))}
-        <div className="relative">
+        <div ref={contactMenuRef} className="relative">
           <button
-            onClick={() => setContactMenuOpen(!contactMenuOpen)}
+            onClick={() => {
+              setContactMenuOpen(!contactMenuOpen);
+              setServicesMenuOpen(false);
+            }}
             className="font-bold hover:text-[#7A5C4D] transition-colors duration-200"
             style={{
               fontFamily: 'var(--font-body)',
@@ -174,11 +274,12 @@ export default function NavBar() {
           </button>
           {contactMenuOpen && (
             <div
-              className="absolute top-full mt-2 right-0 rounded-lg shadow-lg z-50"
+              className="absolute top-full mt-3 right-0 rounded-2xl shadow-2xl z-50 overflow-hidden"
               style={{
-                minWidth: '150px',
+                minWidth: '180px',
                 background: '#F8F2EA',
-                border: '1px solid rgba(62,47,43,0.12)',
+                border: '1px solid rgba(62,47,43,0.14)',
+                backdropFilter: 'blur(8px)',
               }}
             >
               <a
@@ -242,6 +343,60 @@ export default function NavBar() {
           className="fixed inset-0 z-40 flex flex-col items-center justify-center gap-8"
           style={{ background: 'rgba(245,239,231,0.97)', backdropFilter: 'blur(12px)' }}
         >
+          <div className="w-full max-w-sm px-6">
+            <button
+              onClick={() => setServicesMenuOpen(!servicesMenuOpen)}
+              className="w-full font-display text-echelon-black text-4xl font-bold hover:text-[#7A5C4D] transition-colors duration-200 flex items-center justify-center gap-3"
+              style={{
+                background: 'none',
+                border: 'none',
+                cursor: 'pointer',
+                letterSpacing: '-0.03em',
+              }}
+            >
+              Services
+              <span
+                style={{
+                  fontSize: '1rem',
+                  transform: servicesMenuOpen ? 'rotate(180deg)' : 'none',
+                  transition: 'transform 0.2s ease',
+                }}
+              >
+                ▾
+              </span>
+            </button>
+
+            {servicesMenuOpen && (
+              <div
+                className="mt-4 rounded-2xl overflow-hidden"
+                style={{ border: '1px solid rgba(62,47,43,0.14)', background: '#F8F2EA' }}
+              >
+                {SERVICE_LINKS.map((service, index) => (
+                  <a
+                    key={service.id}
+                    href={`/homepage?service=${service.id}#services`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => {
+                      setServicesMenuOpen(false);
+                      setMenuOpen(false);
+                    }}
+                    className="block px-4 py-3 text-center text-echelon-black hover:bg-[#EDE3D7] transition-colors duration-200"
+                    style={{
+                      textDecoration: 'none',
+                      borderBottom:
+                        index === SERVICE_LINKS.length - 1
+                          ? 'none'
+                          : '1px solid rgba(62,47,43,0.08)',
+                    }}
+                  >
+                    {service.label}
+                  </a>
+                ))}
+              </div>
+            )}
+          </div>
+
           {NAV_LINKS.map((link) => (
             <button
               key={link.label}
@@ -258,7 +413,10 @@ export default function NavBar() {
             </button>
           ))}
           <button
-            onClick={() => setContactMenuOpen(!contactMenuOpen)}
+            onClick={() => {
+              setContactMenuOpen(!contactMenuOpen);
+              setServicesMenuOpen(false);
+            }}
             className="font-display text-echelon-black text-4xl font-bold hover:text-[#7A5C4D] transition-colors duration-200"
             style={{
               background: 'none',
