@@ -2,6 +2,7 @@
 
 import React, { useEffect, useRef } from 'react';
 import AppImage from '@/components/ui/AppImage';
+import HowSystemWorksSection from './HowSystemWorksSection';
 import type { Service } from './servicesData';
 
 interface Props {
@@ -490,6 +491,12 @@ export default function ServiceModal({ service, onClose }: Props) {
                       </a>
                     </div>
                   ))}
+                </div>
+              )}
+
+              {service.id === 'social-media' && (
+                <div className="relative z-10 mt-14 md:mt-16">
+                  <HowSystemWorksSection variant="overlay" />
                 </div>
               )}
             </div>

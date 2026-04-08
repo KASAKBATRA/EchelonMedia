@@ -3,7 +3,6 @@ import { Suspense } from 'react';
 import IntroOverlay from './components/IntroOverlay';
 import NavBar from '../../components/Header';
 import HeroSection from './components/HeroSection';
-import HowSystemWorksSection from './components/HowSystemWorksSection';
 import PortfolioSection from './components/PortfolioSection';
 import CareersSection from './components/CarrerSection';
 import CollaboratorsSection from './components/CollaboratorsSection';
@@ -19,7 +18,6 @@ export default function HomePage() {
       <main>
         <HeroSection />
         <CollaboratorsSection />
-        <HowSystemWorksSection />
         <PortfolioSection />
         <CareersSection />
       </main>

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 interface WorkStep {
   number: string;
@@ -112,8 +112,13 @@ const STEPS: WorkStep[] = [
   },
 ];
 
-export default function HowSystemWorksSection() {
+interface HowSystemWorksSectionProps {
+  variant?: 'default' | 'overlay';
+}
+
+export default function HowSystemWorksSection({ variant = 'default' }: HowSystemWorksSectionProps) {
   const sectionRef = useRef<HTMLElement>(null);
+  const [pathActive, setPathActive] = useState(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -121,6 +126,7 @@ export default function HowSystemWorksSection() {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.classList.add('revealed');
+            setPathActive(true);
           }
         });
       },
@@ -134,99 +140,241 @@ export default function HowSystemWorksSection() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="py-24 md:py-28" style={{ background: '#F5EFE7' }}>
-      <div className="max-w-7xl mx-auto px-6 md:px-10">
-        <div className="reveal-hidden mb-12 md:mb-14">
-          <div className="section-label" style={{ color: '#D6C3A3' }}>
+    <section
+      ref={sectionRef}
+      className="relative overflow-hidden rounded-[2rem] px-6 py-14 md:px-10 md:py-16"
+      style={{
+        background: variant === 'overlay' ? 'transparent' : '#F5EFE7',
+        border: variant === 'overlay' ? '1px solid rgba(214,195,163,0.14)' : '1px solid rgba(184,148,105,0.2)',
+      }}
+    >
+      <div
+        className="pointer-events-none absolute inset-0 opacity-90"
+        style={{
+          background:
+            variant === 'overlay'
+              ? 'radial-gradient(circle at 20% 20%, rgba(214,195,163,0.18) 0%, transparent 28%), radial-gradient(circle at 80% 12%, rgba(122,92,77,0.08) 0%, transparent 24%), radial-gradient(circle at 50% 90%, rgba(214,195,163,0.1) 0%, transparent 32%)'
+              : 'radial-gradient(circle at 20% 20%, rgba(214,195,163,0.34) 0%, transparent 28%), radial-gradient(circle at 80% 12%, rgba(122,92,77,0.10) 0%, transparent 24%), radial-gradient(circle at 50% 90%, rgba(214,195,163,0.18) 0%, transparent 32%)',
+        }}
+      />
+
+      <div className="relative z-10 max-w-6xl mx-auto">
+        <div className="reveal-hidden text-center mb-12 md:mb-14">
+          <div className="section-label section-label--no-prefix justify-center" style={{ color: '#D6C3A3' }}>
             How Our System Works
           </div>
           <h2
-            className="font-display"
+            className="font-display mx-auto"
             style={{
-              fontSize: 'clamp(2.1rem, 4.5vw, 3.7rem)',
-              fontWeight: 700,
-              lineHeight: 1.08,
-              letterSpacing: '-0.03em',
-              color: '#3E2F2B',
+              fontSize: 'clamp(2.3rem, 4.8vw, 4.4rem)',
+              fontWeight: 800,
+              lineHeight: 1,
+              letterSpacing: '-0.04em',
+              color: variant === 'overlay' ? '#E8DCC9' : '#3E2F2B',
+              maxWidth: '12ch',
             }}
           >
-            A clear process
-            <br />
-            <span
-              style={{
-                color: '#7A5C4D',
-                fontFamily: 'var(--font-cursive)',
-                fontSize: '1.05em',
-                letterSpacing: '0.005em',
-              }}
-            >
-              from first call to scale.
-            </span>
+            A roadmap that keeps every project moving.
           </h2>
+          <p
+            className="mt-4 mx-auto max-w-2xl text-sm md:text-base leading-relaxed"
+            style={{ color: variant === 'overlay' ? 'rgba(245,239,231,0.82)' : '#7A5C4D', fontFamily: 'var(--font-body)' }}
+          >
+            A simple system with a clear path from first call to execution, so the work feels
+            structured, not random.
+          </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5 md:gap-6">
-          {STEPS.map((step) => (
-            <article
-              key={step.number}
-              className="reveal-hidden stagger-child rounded-3xl p-6 md:p-7"
-              style={{
-                background: step.tones.cardBg,
-                border: `1px solid ${step.tones.border}`,
-                boxShadow: '0 10px 30px rgba(62,47,43,0.08)',
-                transition: 'transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease',
-              }}
-              onMouseEnter={(e) => {
-                const el = e.currentTarget;
-                el.style.transform = 'translateY(-6px)';
-                el.style.boxShadow = '0 20px 42px rgba(62,47,43,0.14)';
-                el.style.borderColor = step.tones.hoverBorder;
-              }}
-              onMouseLeave={(e) => {
-                const el = e.currentTarget;
-                el.style.transform = 'translateY(0)';
-                el.style.boxShadow = '0 10px 30px rgba(62,47,43,0.08)';
-                el.style.borderColor = step.tones.border;
-              }}
-            >
-              <span
-                aria-hidden="true"
-                className="block h-1.5 rounded-full mb-5"
-                style={{ background: step.tones.accent }}
-              />
-              <div className="flex items-center justify-between mb-5">
-                <span
-                  className="inline-flex items-center justify-center w-10 h-10 rounded-full"
-                  style={{
-                    background: step.tones.iconBg,
-                    border: '1px solid rgba(122,92,77,0.25)',
-                  }}
-                >
-                  {step.icon}
-                </span>
-                <span
-                  className="text-xs font-semibold"
-                  style={{
-                    color: step.tones.numberColor,
-                    letterSpacing: '0.16em',
-                    fontFamily: 'var(--font-body)',
-                  }}
-                >
-                  {step.number}
-                </span>
-              </div>
+        <div className="relative hidden md:block min-h-[560px]">
+          <svg className="absolute inset-0 w-full h-full" viewBox="0 0 1200 560" fill="none" aria-hidden="true">
+            <path
+              d="M110 350 C 220 120, 330 120, 440 260 S 700 420, 830 230 S 980 110, 1085 250"
+              stroke="#7A5C4D"
+              strokeWidth="7"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              fill="none"
+              strokeDasharray="1800"
+              strokeDashoffset={pathActive ? '0' : '1800'}
+              style={{ transition: 'stroke-dashoffset 1.8s ease' }}
+            />
+            <path
+              d="M1060 238 C 1120 260, 1130 325, 1080 350 C 1030 374, 982 350, 972 320"
+              stroke="#7A5C4D"
+              strokeWidth="6"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              fill="none"
+              strokeDasharray="420"
+              strokeDashoffset={pathActive ? '0' : '420'}
+              style={{ transition: 'stroke-dashoffset 2.1s ease 0.1s' }}
+            />
+            <path d="M972 320l16 5-9 14" fill="#7A5C4D" />
+          </svg>
 
-              <h3
-                className="font-display text-xl mb-2"
-                style={{ color: '#3E2F2B', letterSpacing: '-0.02em', lineHeight: 1.15 }}
+          {STEPS.map((step, index) => {
+            const desktopPositions = [
+              { left: '8%', top: '58%' },
+              { left: '31%', top: '14%' },
+              { left: '56%', top: '62%' },
+              { left: '80%', top: '18%' },
+            ];
+
+            const position = desktopPositions[index];
+
+            return (
+              <article
+                key={step.number}
+                className="absolute w-[240px] md:w-[260px] transition-all duration-500 ease-out group"
+                style={{
+                  left: position.left,
+                  top: position.top,
+                  opacity: pathActive ? 1 : 0,
+                  transform: pathActive ? 'translateY(0)' : 'translateY(14px)',
+                  transitionDelay: `${index * 170}ms`,
+                }}
               >
-                {step.title}
-              </h3>
-              <p className="text-sm" style={{ color: '#8B756B', fontFamily: 'var(--font-body)' }}>
-                {step.description}
-              </p>
-            </article>
-          ))}
+                <div className="relative pl-10 pr-2">
+                  <div
+                    className="absolute left-0 top-1.5 w-6 h-6 rounded-full transition-transform duration-300 group-hover:scale-110"
+                    style={{
+                      background: 'radial-gradient(circle, #F5EFE7 0%, #D6C3A3 45%, #7A5C4D 100%)',
+                      boxShadow: '0 0 0 10px rgba(214,195,163,0.12), 0 0 28px rgba(122,92,77,0.24)',
+                    }}
+                  />
+                  <div
+                    className="transition-transform duration-300 group-hover:scale-[1.03]"
+                    style={{
+                      paddingLeft: '0.25rem',
+                      textShadow: '0 1px 0 rgba(255,255,255,0.2)',
+                    }}
+                  >
+                    <div
+                      className="text-xs font-semibold mb-2"
+                      style={{
+                        color: variant === 'overlay' ? '#E0C9A0' : '#7A5C4D',
+                        letterSpacing: '0.18em',
+                        fontFamily: 'var(--font-body)',
+                      }}
+                    >
+                      {step.number}
+                    </div>
+                    <h3
+                      className="font-display text-2xl mb-2"
+                      style={{
+                        color: variant === 'overlay' ? '#F3E8D8' : '#3E2F2B',
+                        letterSpacing: '-0.03em',
+                        lineHeight: 1.02,
+                      }}
+                    >
+                      {step.title}
+                    </h3>
+                    <p
+                      className="text-sm leading-relaxed"
+                      style={{
+                        color: variant === 'overlay' ? 'rgba(245,239,231,0.75)' : '#7B655A',
+                        fontFamily: 'var(--font-body)',
+                      }}
+                    >
+                      {step.description}
+                    </p>
+                  </div>
+                </div>
+              </article>
+            );
+          })}
+        </div>
+
+        <div className="relative md:hidden mt-10 min-h-[720px]">
+          <svg className="absolute inset-0 w-full h-full" viewBox="0 0 420 760" fill="none" aria-hidden="true">
+            <path
+              d="M86 90 C 170 130, 210 180, 190 250 S 100 380, 160 450 S 280 560, 244 650"
+              stroke="#7A5C4D"
+              strokeWidth="7"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              fill="none"
+              strokeDasharray="1300"
+              strokeDashoffset={pathActive ? '0' : '1300'}
+              style={{ transition: 'stroke-dashoffset 1.8s ease' }}
+            />
+            <path d="M235 652l16 4-10 14" fill="#7A5C4D" />
+          </svg>
+
+          {STEPS.map((step, index) => {
+            const mobilePositions = [
+              { left: '8%', top: '6%' },
+              { left: '48%', top: '23%' },
+              { left: '10%', top: '44%' },
+              { left: '44%', top: '68%' },
+            ];
+
+            const position = mobilePositions[index];
+            const alignRight = index % 2 === 1;
+
+            return (
+              <article
+                key={step.number}
+                className="absolute w-[78%] transition-all duration-500 ease-out group"
+                style={{
+                  left: position.left,
+                  top: position.top,
+                  opacity: pathActive ? 1 : 0,
+                  transform: pathActive ? 'translateY(0)' : 'translateY(12px)',
+                  transitionDelay: `${index * 180}ms`,
+                }}
+              >
+                <div className={`relative ${alignRight ? 'pl-12 pr-0 text-right' : 'pl-12 pr-0'}`}>
+                  <div
+                    className="absolute left-0 top-1.5 w-6 h-6 rounded-full transition-transform duration-300 group-hover:scale-110"
+                    style={{
+                      background: 'radial-gradient(circle, #F5EFE7 0%, #D6C3A3 45%, #7A5C4D 100%)',
+                      boxShadow: '0 0 0 10px rgba(214,195,163,0.12), 0 0 28px rgba(122,92,77,0.24)',
+                    }}
+                  />
+                  <div
+                    className="transition-transform duration-300 group-hover:scale-[1.02]"
+                    style={alignRight ? { paddingRight: '0.25rem' } : { paddingLeft: '0.25rem' }}
+                  >
+                    <div
+                      className="text-xs font-semibold mb-2"
+                      style={{
+                        color: variant === 'overlay' ? '#E0C9A0' : '#7A5C4D',
+                        letterSpacing: '0.18em',
+                        fontFamily: 'var(--font-body)',
+                      }}
+                    >
+                      {step.number}
+                    </div>
+                    <h3
+                      className="font-display text-xl mb-2"
+                      style={{
+                        color: variant === 'overlay' ? '#F3E8D8' : '#3E2F2B',
+                        letterSpacing: '-0.03em',
+                        lineHeight: 1.05,
+                      }}
+                    >
+                      {step.title}
+                    </h3>
+                    <p
+                      className="text-sm leading-relaxed"
+                      style={{
+                        color: variant === 'overlay' ? 'rgba(245,239,231,0.75)' : '#7B655A',
+                        fontFamily: 'var(--font-body)',
+                      }}
+                    >
+                      {step.description}
+                    </p>
+                  </div>
+                </div>
+              </article>
+            );
+          })}
+        </div>
+
+        <div className="mt-10 flex items-center justify-center gap-3 text-xs md:text-sm" style={{ color: '#7A5C4D', fontFamily: 'var(--font-body)' }}>
+          <span className="inline-flex items-center justify-center w-5 h-5 rounded-full" style={{ background: 'rgba(122,92,77,0.12)' }}>↻</span>
+          Continuous growth loop from execution back to planning
         </div>
       </div>
     </section>
