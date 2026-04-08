@@ -333,11 +333,11 @@ export default function ServiceModal({ service, onClose }: Props) {
               </div>
               {service.id === 'social-media' ? (
                 <div className="relative z-10 rounded-2xl border border-white/20 bg-[#3A2D29] overflow-x-auto">
-                  <table className="w-full min-w-[760px] border-collapse">
+                  <table className="w-full table-fixed min-w-0 md:min-w-[760px] border-collapse">
                     <thead>
                       <tr className="border-b border-white/20 bg-[#463630]">
                         <th
-                          className="text-left px-5 py-4 text-xs uppercase tracking-[0.16em] text-[#F5EFE7]"
+                          className="text-left px-2 md:px-5 py-3 md:py-4 text-[10px] md:text-xs uppercase tracking-[0.12em] md:tracking-[0.16em] text-[#F5EFE7]"
                           style={{ fontFamily: 'var(--font-body)' }}
                         >
                           Features
@@ -345,11 +345,11 @@ export default function ServiceModal({ service, onClose }: Props) {
                         {service.packages.slice(0, 3).map((pkg, i) => {
                           const label = ['Basic', 'Growth', 'Premium'][i] ?? pkg.name;
                           return (
-                            <th key={pkg.name} className="px-5 py-4 text-center align-top">
-                              <div className="text-sm font-semibold text-[#F5EFE7]" style={{ fontFamily: 'var(--font-body)' }}>
+                            <th key={pkg.name} className="px-1.5 md:px-5 py-3 md:py-4 text-center align-top">
+                              <div className="text-[11px] md:text-sm font-semibold text-[#F5EFE7]" style={{ fontFamily: 'var(--font-body)' }}>
                                 {label}
                               </div>
-                              <div className="text-xs text-[#E0C9A0] mt-1" style={{ fontFamily: 'var(--font-body)' }}>
+                              <div className="text-[10px] md:text-xs text-[#E0C9A0] mt-1" style={{ fontFamily: 'var(--font-body)' }}>
                                 {pkg.price}
                               </div>
                             </th>
@@ -369,7 +369,7 @@ export default function ServiceModal({ service, onClose }: Props) {
                       ].map((row) => (
                         <tr key={row.key} className="border-b border-white/15 last:border-b-0 odd:bg-[#3E2F2B] even:bg-[#43332E]">
                           <td
-                            className="px-5 py-4 text-sm font-medium text-[#F5EFE7]"
+                            className="px-2 md:px-5 py-3 md:py-4 text-[11px] md:text-sm font-medium text-[#F5EFE7]"
                             style={{ fontFamily: 'var(--font-body)' }}
                           >
                             {row.label}
@@ -377,7 +377,7 @@ export default function ServiceModal({ service, onClose }: Props) {
                           {service.packages.slice(0, 3).map((pkg) => (
                             <td
                               key={`${pkg.name}-${row.key}`}
-                              className="px-5 py-4 text-sm text-center text-[#F5EFE7]"
+                              className="px-1.5 md:px-5 py-3 md:py-4 text-[11px] md:text-sm text-center text-[#F5EFE7]"
                               style={{ fontFamily: 'var(--font-body)' }}
                             >
                               {row.key === 'platforms'
@@ -388,16 +388,16 @@ export default function ServiceModal({ service, onClose }: Props) {
                         </tr>
                       ))}
                       <tr>
-                        <td className="px-5 py-5" />
+                        <td className="px-2 md:px-5 py-4 md:py-5" />
                         {service.packages.slice(0, 3).map((pkg) => (
-                          <td key={`${pkg.name}-cta`} className="px-5 py-5 text-center">
+                          <td key={`${pkg.name}-cta`} className="px-1.5 md:px-5 py-4 md:py-5 text-center">
                             <a
                               href={`https://wa.me/919910706037?text=${encodeURIComponent(
                                 `Hi Echelon Media, I want to get started with ${service.title} - ${pkg.name} (${pkg.price}).`
                               )}`}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="inline-flex items-center justify-center w-full py-2.5 rounded-xl text-sm font-semibold transition-all duration-300"
+                              className="inline-flex items-center justify-center w-full py-2 md:py-2.5 rounded-lg md:rounded-xl text-[11px] md:text-sm font-semibold transition-all duration-300"
                               style={{
                                 fontFamily: 'var(--font-body)',
                                 background: pkg.featured ? '#7A5C4D' : 'rgba(245,239,231,0.08)',
@@ -415,7 +415,7 @@ export default function ServiceModal({ service, onClose }: Props) {
                   </table>
                 </div>
               ) : (
-                <div className="relative z-10 grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div className="relative z-10 grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
                   {service.packages.map((pkg, i) => (
                     <div key={i} className={`package-card p-6 ${pkg.featured ? 'featured' : ''}`}>
                       {pkg.featured && (
