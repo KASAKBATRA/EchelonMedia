@@ -106,7 +106,10 @@ export default function FooterSection() {
           }}
         />
         <div className="relative z-10">
-          <div className="section-label justify-center mb-6" style={{ color: '#D6C3A3' }}>
+          <div
+            className="section-label section-label--no-prefix justify-center mb-6"
+            style={{ color: '#D6C3A3' }}
+          >
             Let&apos;s Create Together
           </div>
           <h2

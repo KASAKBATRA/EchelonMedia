@@ -1188,6 +1188,10 @@ body.modal-open {
   background: var(--color-accent);
 }
 
+.section-label--no-prefix::before {
+  display: none;
+}
+
 /* ─── CLOSE BUTTON ─── */
 .close-btn {
   position: fixed;

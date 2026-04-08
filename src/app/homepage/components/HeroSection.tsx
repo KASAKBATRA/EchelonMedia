@@ -402,7 +402,9 @@ export default function HeroSection() {
         style={{ zIndex: 10 }}
       >
         <div className="text-center max-w-5xl mx-auto">
-          <div className="section-label justify-center mb-8">Media and Marketing Company</div>
+          <div className="section-label section-label--no-prefix justify-center mb-8">
+            Media and Marketing Company
+          </div>
           <h1 className="hero-headline mb-6">
             We craft
             <br />
