@@ -12,6 +12,15 @@ const COLLABORATOR_LOGOS = [
   '/assets/image/all_logos__6_-removebg-preview.png',
   '/assets/image/all_logos__7_-removebg-preview.png',
   '/assets/image/all_logos__8_-removebg-preview.png',
+  '/assets/image/dr._sabherwal_dental.jpg-removebg-preview.png',
+  '/assets/image/jito_ladies_north_delhi.jpg-removebg-preview.png',
+  '/assets/image/jito_north_youth.jpg-removebg-preview.png',
+  '/assets/image/jito_north_zone.jpg-removebg-preview.png',
+  '/assets/image/logo.png',
+  '/assets/image/MMk_logo-removebg-preview.png',
+  '/assets/image/pentagons_ai.jpg-removebg-preview.png',
+  '/assets/image/Shop_e_gem_logo_insta-removebg-preview.png',
+  '/assets/image/Untitled%20design%20(1).png',
 ];
 
 export default function CollaboratorsSection() {
@@ -32,20 +41,20 @@ export default function CollaboratorsSection() {
       </div>
 
       {/* Mobile: show all logos at once */}
-      <div className="md:hidden relative z-10 px-4">
-        <div className="grid grid-cols-3 gap-2.5">
+      <div className="md:hidden relative z-10 px-3">
+        <div className="grid grid-cols-4 gap-1.5">
           {COLLABORATOR_LOGOS.map((logoSrc, idx) => (
             <div
               key={`mobile-${logoSrc}-${idx}`}
-              className="flex items-center justify-center rounded-xl px-2 py-2 bg-[#F5EFE7] border border-[#D6C3A3]/35 shadow-[0_8px_20px_rgba(62,47,43,0.18)]"
+              className="flex items-center justify-center rounded-lg px-1.5 py-1.5 bg-[#F5EFE7] border border-[#D6C3A3]/35 shadow-[0_6px_14px_rgba(62,47,43,0.15)]"
             >
               <Image
                 src={logoSrc}
                 alt="Collaborator logo"
                 width={220}
                 height={90}
-                className="h-10 w-auto object-contain opacity-100 filter contrast-125 saturate-115"
-                priority={idx < 4}
+                className="h-7 w-auto object-contain opacity-100 filter contrast-125 saturate-115"
+                priority={idx < 8}
               />
             </div>
           ))}
