@@ -78,18 +78,6 @@ function PlatformLogo({ id }: { id: PlatformId }) {
 export default function ServiceModal({ service, onClose }: Props) {
   const backdropRef = useRef<HTMLDivElement>(null);
   const modalRef = useRef<HTMLDivElement>(null);
-  const comparisonRows: Array<{
-    key: 'platforms' | 'posts' | 'reels' | 'graphics' | 'strategy' | 'planning' | 'shoots';
-    label: string;
-  }> = [
-    { key: 'platforms', label: 'Platforms Managed' },
-    { key: 'posts', label: 'Posts per Month' },
-    { key: 'reels', label: 'Reels' },
-    { key: 'graphics', label: 'Graphic Posts' },
-    { key: 'strategy', label: 'Content Strategy' },
-    { key: 'planning', label: 'Content Planning' },
-    { key: 'shoots', label: 'Shoots per Month' },
-  ];
 
   const getFeatureText = (pkg: Service['packages'][number], matcher: RegExp) =>
     pkg.features.find((f) => matcher.test(f));
@@ -254,7 +242,7 @@ export default function ServiceModal({ service, onClose }: Props) {
           )}
 
           {/* Hero Image */}
-          <div className="relative z-10 h-[44vh] md:h-[55vh] overflow-hidden">
+          <div className="relative z-10 h-[55vh] overflow-hidden">
             <AppImage
               src={service.coverImage}
               alt={service.coverAlt}
@@ -270,7 +258,7 @@ export default function ServiceModal({ service, onClose }: Props) {
                   'linear-gradient(to bottom, rgba(62,47,43,0.25) 0%, rgba(62,47,43,0.82) 100%)',
               }}
             />
-            <div className="absolute bottom-0 left-0 right-0 p-5 md:p-12">
+            <div className="absolute bottom-0 left-0 right-0 p-8 md:p-12">
               <div className="max-w-5xl mx-auto">
                 <span
                   className="text-echelon-gold text-xs font-bold tracking-widest mb-3 block"
@@ -290,7 +278,7 @@ export default function ServiceModal({ service, onClose }: Props) {
                   {service.title}
                 </h2>
                 <p
-                  className="text-white/70 text-sm md:text-lg max-w-xl"
+                  className="text-white/70 text-lg max-w-xl"
                   style={{ fontFamily: 'var(--font-body)' }}
                 >
                   {service.description}
@@ -300,7 +288,7 @@ export default function ServiceModal({ service, onClose }: Props) {
           </div>
 
           {/* Content */}
-          <div className="relative z-10 max-w-5xl mx-auto px-4 md:px-8 py-12 md:py-16">
+          <div className="relative z-10 max-w-5xl mx-auto px-6 md:px-8 py-16">
             {/* Image Gallery */}
             <div className="mb-16">
               <div className="gallery-slider">
@@ -308,7 +296,7 @@ export default function ServiceModal({ service, onClose }: Props) {
                   <div
                     key={i}
                     className="gallery-slide"
-                    style={{ minWidth: i === 0 ? 'clamp(230px, 82vw, 420px)' : 'clamp(210px, 70vw, 320px)', height: '240px' }}
+                    style={{ width: i === 0 ? '65%' : '45%', minWidth: '280px', height: '320px' }}
                   >
                     <AppImage
                       src={img.src}
@@ -345,75 +333,8 @@ export default function ServiceModal({ service, onClose }: Props) {
                 Choose Your Package
               </div>
               {service.id === 'social-media' ? (
-                <>
-                  <div className="relative z-10 md:hidden space-y-3">
-                    {service.packages.slice(0, 3).map((pkg, i) => {
-                      const label = ['Basic', 'Growth', 'Premium'][i] ?? pkg.name;
-                      return (
-                        <div
-                          key={`${pkg.name}-mobile`}
-                          className="rounded-xl border border-white/20 bg-[#3A2D29]/95 p-3"
-                        >
-                          <div className="flex items-baseline justify-between mb-2.5">
-                            <h3
-                              className="text-sm font-semibold text-[#F5EFE7]"
-                              style={{ fontFamily: 'var(--font-body)' }}
-                            >
-                              {label}
-                            </h3>
-                            <span
-                              className="text-xs text-[#E0C9A0]"
-                              style={{ fontFamily: 'var(--font-body)' }}
-                            >
-                              {pkg.price}
-                            </span>
-                          </div>
-
-                          <div className="space-y-1.5">
-                            {comparisonRows.map((row) => (
-                              <div key={`${pkg.name}-${row.key}-mobile`} className="grid grid-cols-[1.1fr_1fr] gap-2 items-center">
-                                <span
-                                  className="text-[11px] text-white/75"
-                                  style={{ fontFamily: 'var(--font-body)' }}
-                                >
-                                  {row.label}
-                                </span>
-                                <div
-                                  className="text-[11px] text-right text-[#F5EFE7]"
-                                  style={{ fontFamily: 'var(--font-body)' }}
-                                >
-                                  {row.key === 'platforms'
-                                    ? renderPlatformCell(pkg)
-                                    : getComparisonValue(pkg, row.key)}
-                                </div>
-                              </div>
-                            ))}
-                          </div>
-
-                          <a
-                            href={`https://wa.me/919910706037?text=${encodeURIComponent(
-                              `Hi Echelon Media, I want to get started with ${service.title} - ${pkg.name} (${pkg.price}).`
-                            )}`}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="mt-3 inline-flex items-center justify-center w-full py-2 rounded-lg text-xs font-semibold transition-all duration-300"
-                            style={{
-                              fontFamily: 'var(--font-body)',
-                              background: pkg.featured ? '#7A5C4D' : 'rgba(245,239,231,0.08)',
-                              color: pkg.featured ? '#F5EFE7' : 'white',
-                              border: '1px solid',
-                              borderColor: pkg.featured ? '#7A5C4D' : 'rgba(245,239,231,0.14)',
-                            }}
-                          >
-                            Get Started
-                          </a>
-                        </div>
-                      );
-                    })}
-                  </div>
-
-                  <div className="relative z-10 hidden md:block rounded-2xl border border-white/20 bg-[#3A2D29] overflow-x-auto">
-                    <table className="w-full table-fixed min-w-0 md:min-w-[760px] border-collapse">
+                <div className="relative z-10 rounded-2xl border border-white/20 bg-[#3A2D29] overflow-x-auto">
+                  <table className="w-full table-fixed min-w-0 md:min-w-[760px] border-collapse">
                     <thead>
                       <tr className="border-b border-white/20 bg-[#463630]">
                         <th
@@ -438,7 +359,15 @@ export default function ServiceModal({ service, onClose }: Props) {
                       </tr>
                     </thead>
                     <tbody>
-                      {comparisonRows.map((row) => (
+                      {[
+                        { key: 'platforms', label: 'Platforms Managed' },
+                        { key: 'posts', label: 'Posts per Month' },
+                        { key: 'reels', label: 'Reels' },
+                        { key: 'graphics', label: 'Graphic Posts' },
+                        { key: 'strategy', label: 'Content Strategy' },
+                        { key: 'planning', label: 'Content Planning' },
+                        { key: 'shoots', label: 'Shoots per Month' },
+                      ].map((row) => (
                         <tr key={row.key} className="border-b border-white/15 last:border-b-0 odd:bg-[#3E2F2B] even:bg-[#43332E]">
                           <td
                             className="px-2 md:px-5 py-3 md:py-4 text-[11px] md:text-sm font-medium text-[#F5EFE7]"
@@ -452,7 +381,9 @@ export default function ServiceModal({ service, onClose }: Props) {
                               className="px-1.5 md:px-5 py-3 md:py-4 text-[11px] md:text-sm text-center text-[#F5EFE7]"
                               style={{ fontFamily: 'var(--font-body)' }}
                             >
-                              {row.key === 'platforms' ? renderPlatformCell(pkg) : getComparisonValue(pkg, row.key)}
+                              {row.key === 'platforms'
+                                ? renderPlatformCell(pkg)
+                                : getComparisonValue(pkg, row.key as Parameters<typeof getComparisonValue>[1])}
                             </td>
                           ))}
                         </tr>
@@ -483,8 +414,7 @@ export default function ServiceModal({ service, onClose }: Props) {
                       </tr>
                     </tbody>
                   </table>
-                  </div>
-                </>
+                </div>
               ) : (
                 <div className="relative z-10 grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
                   {service.packages.map((pkg, i) => (
