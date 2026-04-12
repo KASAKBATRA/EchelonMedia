@@ -285,103 +285,83 @@ export default function HowSystemWorksSection({ variant = 'default' }: HowSystem
           })}
         </div>
 
-        <div className="relative md:hidden mt-8 min-h-[760px]">
-          <svg
-            className="absolute inset-0 w-full h-full pointer-events-none"
-            viewBox="0 0 420 760"
-            fill="none"
-            aria-hidden="true"
-            style={{ opacity: 0.62 }}
-          >
-            <path
-              d="M98 110 C 210 132, 286 186, 304 254 S 230 392, 102 446 S 154 598, 304 700"
-              stroke="#7A5C4D"
-              strokeWidth="6"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              fill="none"
-              strokeDasharray="1280"
-              strokeDashoffset={pathActive ? '0' : '1280'}
-              style={{ transition: 'stroke-dashoffset 1.8s ease' }}
-            />
-            <path d="M294 696l16 4-10 14" fill="#7A5C4D" />
-          </svg>
+        <div className="relative md:hidden mt-8 pl-1">
+          <div
+            className="absolute left-4 top-2 bottom-14 w-[3px] rounded-full"
+            style={{
+              background: '#7A5C4D',
+              transform: pathActive ? 'scaleY(1)' : 'scaleY(0)',
+              transformOrigin: 'top',
+              transition: 'transform 1s ease',
+              opacity: 0.8,
+            }}
+          />
 
-          {STEPS.map((step, index) => {
-            const mobilePositions = [
-              { left: '4%', top: '5%' },
-              { left: '40%', top: '27%' },
-              { left: '4%', top: '51%' },
-              { left: '40%', top: '75%' },
-            ];
-
-            const position = mobilePositions[index];
-            const alignRight = index % 2 === 1;
-
-            return (
-              <article
-                key={step.number}
-                className="absolute w-[56%] transition-all duration-500 ease-out group"
+          {STEPS.map((step, index) => (
+            <article
+              key={step.number}
+              className="relative pl-12 pr-1 mb-10 last:mb-0 transition-all duration-500 ease-out group"
+              style={{
+                opacity: pathActive ? 1 : 0,
+                transform: pathActive ? 'translateY(0)' : 'translateY(12px)',
+                transitionDelay: `${index * 150}ms`,
+              }}
+            >
+              <div
+                className="absolute left-0 top-1.5 w-8 h-8 rounded-full transition-transform duration-300 group-hover:scale-110"
                 style={{
-                  left: position.left,
-                  top: position.top,
-                  opacity: pathActive ? 1 : 0,
-                  transform: pathActive ? 'translateY(0)' : 'translateY(12px)',
-                  transitionDelay: `${index * 180}ms`,
+                  background: 'radial-gradient(circle, #F5EFE7 0%, #D6C3A3 45%, #7A5C4D 100%)',
+                  boxShadow: '0 0 0 8px rgba(214,195,163,0.12), 0 0 24px rgba(122,92,77,0.26)',
+                }}
+              />
+
+              <div
+                className="rounded-xl px-3 py-2.5 transition-transform duration-300 group-hover:scale-[1.01]"
+                style={{
+                  background: 'linear-gradient(90deg, rgba(62,47,43,0.6) 0%, rgba(62,47,43,0.42) 100%)',
                 }}
               >
-                <div className={`relative ${alignRight ? 'pr-9 text-right' : 'pl-9'}`}>
-                  <div
-                    className={`absolute top-1.5 w-5 h-5 rounded-full transition-transform duration-300 group-hover:scale-110 ${alignRight ? 'right-0' : 'left-0'}`}
-                    style={{
-                      background: 'radial-gradient(circle, #F5EFE7 0%, #D6C3A3 45%, #7A5C4D 100%)',
-                      boxShadow: '0 0 0 8px rgba(214,195,163,0.12), 0 0 24px rgba(122,92,77,0.26)',
-                    }}
-                  />
-                  <div
-                    className="transition-transform duration-300 group-hover:scale-[1.02]"
-                    style={{
-                      ...(alignRight ? { paddingRight: '0.1rem' } : { paddingLeft: '0.1rem' }),
-                      background: 'linear-gradient(90deg, rgba(62,47,43,0.62) 0%, rgba(62,47,43,0.45) 100%)',
-                      borderRadius: '12px',
-                      paddingTop: '0.3rem',
-                      paddingBottom: '0.3rem',
-                    }}
-                  >
-                    <div
-                      className="text-[11px] font-semibold mb-1.5"
-                      style={{
-                        color: variant === 'overlay' ? '#E0C9A0' : '#7A5C4D',
-                        letterSpacing: '0.18em',
-                        fontFamily: 'var(--font-body)',
-                      }}
-                    >
-                      {step.number}
-                    </div>
-                    <h3
-                      className="font-display text-[1.45rem] mb-1"
-                      style={{
-                        color: variant === 'overlay' ? '#F3E8D8' : '#3E2F2B',
-                        letterSpacing: '-0.03em',
-                        lineHeight: 0.96,
-                      }}
-                    >
-                      {step.title}
-                    </h3>
-                    <p
-                      className="text-[16px] leading-[1.35]"
-                      style={{
-                        color: variant === 'overlay' ? 'rgba(245,239,231,0.75)' : '#7B655A',
-                        fontFamily: 'var(--font-body)',
-                      }}
-                    >
-                      {step.description}
-                    </p>
-                  </div>
+                <div
+                  className="text-[11px] font-semibold mb-1.5"
+                  style={{
+                    color: variant === 'overlay' ? '#E0C9A0' : '#7A5C4D',
+                    letterSpacing: '0.18em',
+                    fontFamily: 'var(--font-body)',
+                  }}
+                >
+                  {step.number}
                 </div>
-              </article>
-            );
-          })}
+                <h3
+                  className="font-display text-[1.32rem] mb-1"
+                  style={{
+                    color: variant === 'overlay' ? '#F3E8D8' : '#3E2F2B',
+                    letterSpacing: '-0.03em',
+                    lineHeight: 1,
+                  }}
+                >
+                  {step.title}
+                </h3>
+                <p
+                  className="text-[15px] leading-[1.35]"
+                  style={{
+                    color: variant === 'overlay' ? 'rgba(245,239,231,0.75)' : '#7B655A',
+                    fontFamily: 'var(--font-body)',
+                  }}
+                >
+                  {step.description}
+                </p>
+              </div>
+            </article>
+          ))}
+
+          <div className="pl-12 pt-3">
+            <span
+              className="inline-flex items-center justify-center w-7 h-7 rounded-full"
+              style={{ background: 'rgba(122,92,77,0.18)', color: '#E0C9A0' }}
+            >
+              ↻
+            </span>
+          </div>
         </div>
 
         <div className="mt-10 flex items-center justify-center gap-3 text-xs md:text-sm" style={{ color: '#7A5C4D', fontFamily: 'var(--font-body)' }}>
