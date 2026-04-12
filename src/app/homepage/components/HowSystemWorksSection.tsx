@@ -286,9 +286,15 @@ export default function HowSystemWorksSection({ variant = 'default' }: HowSystem
         </div>
 
         <div className="relative md:hidden mt-8 min-h-[760px]">
-          <svg className="absolute inset-0 w-full h-full" viewBox="0 0 420 760" fill="none" aria-hidden="true">
+          <svg
+            className="absolute inset-0 w-full h-full pointer-events-none"
+            viewBox="0 0 420 760"
+            fill="none"
+            aria-hidden="true"
+            style={{ opacity: 0.62 }}
+          >
             <path
-              d="M70 95 C 165 120, 255 165, 300 240 S 252 360, 152 430 S 120 555, 282 680"
+              d="M98 110 C 210 132, 286 186, 304 254 S 230 392, 102 446 S 154 598, 304 700"
               stroke="#7A5C4D"
               strokeWidth="6"
               strokeLinecap="round"
@@ -298,15 +304,15 @@ export default function HowSystemWorksSection({ variant = 'default' }: HowSystem
               strokeDashoffset={pathActive ? '0' : '1280'}
               style={{ transition: 'stroke-dashoffset 1.8s ease' }}
             />
-            <path d="M272 678l16 4-10 14" fill="#7A5C4D" />
+            <path d="M294 696l16 4-10 14" fill="#7A5C4D" />
           </svg>
 
           {STEPS.map((step, index) => {
             const mobilePositions = [
               { left: '4%', top: '5%' },
-              { left: '40%', top: '28%' },
-              { left: '4%', top: '52%' },
-              { left: '40%', top: '76%' },
+              { left: '40%', top: '27%' },
+              { left: '4%', top: '51%' },
+              { left: '40%', top: '75%' },
             ];
 
             const position = mobilePositions[index];
@@ -334,7 +340,13 @@ export default function HowSystemWorksSection({ variant = 'default' }: HowSystem
                   />
                   <div
                     className="transition-transform duration-300 group-hover:scale-[1.02]"
-                    style={alignRight ? { paddingRight: '0.1rem' } : { paddingLeft: '0.1rem' }}
+                    style={{
+                      ...(alignRight ? { paddingRight: '0.1rem' } : { paddingLeft: '0.1rem' }),
+                      background: 'linear-gradient(90deg, rgba(62,47,43,0.62) 0%, rgba(62,47,43,0.45) 100%)',
+                      borderRadius: '12px',
+                      paddingTop: '0.3rem',
+                      paddingBottom: '0.3rem',
+                    }}
                   >
                     <div
                       className="text-[11px] font-semibold mb-1.5"
