@@ -1219,6 +1219,15 @@ body.modal-open {
   transform: rotate(90deg);
 }
 
+@media (max-width: 768px) {
+  .close-btn {
+    top: 0.8rem;
+    right: 0.8rem;
+    width: 40px;
+    height: 40px;
+  }
+}
+
 /* ─── COLLABORATORS MARQUEE ─── */
 @keyframes collaborators-scroll {
   0% {
